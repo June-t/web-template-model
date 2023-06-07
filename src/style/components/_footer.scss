@@ -1,0 +1,17 @@
+.footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	grid-area: footer;
+	color: var(--color-secondary);
+	text-transform: uppercase;
+	margin: 0 0 1em 0;
+
+	& span {
+		text-align: center;
+	}
+}
+
+.footerExtend {
+	@extend .footer;
+}

@@ -1,0 +1,25 @@
+/*******************************************************
+    SCSS
+*******************************************************/
+
+/*============== 01. Media Query ===============*/
+
+@mixin media($breakpoint) {
+
+  @each $breakpoints,
+  $size in $media {
+    @if $breakpoint==$breakpoints {
+      @media screen and (max-width: $size) {
+        @content;
+      }
+    }
+  }
+}
+
+
+/*============== 02. Other ===============*/
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}

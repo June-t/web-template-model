@@ -1,0 +1,105 @@
+.contact {
+	display: grid;
+	// grid-template-columns: 0.7fr 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	width: 100%;
+	height: 100vh;
+
+	@include media(mb) {
+		grid-template-columns: none;
+	}
+
+	&__background {
+		width: 100%;
+		height: 100%;
+		padding: 2rem;
+
+		background-image: url('https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642767685-5e7e87db137d781c81e4f13a805fded7.jpg');
+		background-size: cover;
+		background-position: center;
+
+		& a {
+			color: var(--color-secondary);
+			text-transform: uppercase;
+		}
+	}
+
+	&__information {
+		// padding: 2rem;
+		@include rfs(2rem, padding);
+
+
+		display: flex;
+		flex-direction: column;
+		text-transform: uppercase;
+		background: var(--color-primary);
+		color: var(--color-secondary);
+		grid-gap: 1em;
+
+		&>span {
+			width: 100%;
+			height: 100%;
+		}
+
+		& a {
+			color: var(--color-secondary);
+			font-weight: 500;
+		}
+
+		& .information__links {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			margin: 0 0 1em 0;
+			gap: 1em;
+
+			& .links__address {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+			}
+
+			& .links__social {
+				@extend .links__address;
+			}
+
+		}
+
+		& .information__message {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			justify-content: space-between;
+			position: relative;
+
+			& span {
+				margin: 1em 0 0 0;
+			}
+
+			& .line {
+				position: absolute;
+				width: calc(100vw - 2px);
+				color: #ffffff26;
+				top: -10px;
+				right: -2rem;
+
+				@include media(mb) {
+					position: absolute;
+					right: 0;
+					width: 100%;
+				}
+			}
+
+			& h2 {
+				@include rfs(7.5rem, font-size);
+				align-self: flex-end;
+
+				@include media(lg) {
+					@include rfs(5rem, font-size);
+				}
+			}
+
+
+		}
+	}
+}

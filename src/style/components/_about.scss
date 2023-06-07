@@ -1,0 +1,35 @@
+.about {
+
+	h1 {
+		@include rfs(7.5rem, font-size);
+		text-transform: uppercase;
+		color: var(--color-secondary);
+	}
+
+	&__content {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-gap: 1em;
+		margin: 1em 0;
+		text-transform: uppercase;
+
+		& h2 {
+			color: var(--color-secondary);
+		}
+
+		& .content__enterview,
+		.content__faq {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+			color: var(--color-secondary);
+		}
+	}
+
+	& .question_answer {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		@include rfs(1rem, font-size);
+	}
+}

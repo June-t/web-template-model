@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'Moderat';
+	src: url('/typography/Moderat-Bold.eot');
+	src: local('Moderat Bold'), local('Moderat-Bold'),
+		url('/typography/Moderat-Bold.eot?#iefix') format('embedded-opentype'),
+		url('/typography/Moderat-Bold.woff2') format('woff2'),
+		url('/typography/Moderat-Bold.woff') format('woff'),
+		url('/typography/Moderat-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Moderat';
+	src: url('/typography/Moderat-Regular.eot');
+	src: local('Moderat Regular'), local('Moderat-Regular'),
+		url('/typography/Moderat-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/typography/Moderat-Regular.woff2') format('woff2'),
+		url('/typography/Moderat-Regular.woff') format('woff'),
+		url('/typography/Moderat-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -1,0 +1,16 @@
+:root {
+	--font-theme: 'Moderat', sans-serif;
+	// colors
+	--color-primary: #222222;
+	--color-secondary: #ebece5;
+	--color-tertiary: #565656;
+}
+
+$media: (
+	xxl: 1400px,
+	xl: 1200px,
+	lg: 1199.98px,
+	md: 991.98px,
+	sm: 767.98px,
+	mb: 575.98px
+);
