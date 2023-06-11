@@ -1,5 +1,7 @@
 .about {
 
+	grid-area: main;
+
 	h1 {
 		@include rfs(7.5rem, font-size);
 		text-transform: uppercase;
@@ -8,7 +10,7 @@
 
 	&__content {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
 		grid-gap: 1em;
 		margin: 1em 0;
 		text-transform: uppercase;

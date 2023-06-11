@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <h3>Chantal G. Crespo</h3>
+        <h3>nastya HAIKO</h3>
         <span>
           A STREET PHOTOGRAPHER <br /> BASED IN LONDON
         </span>

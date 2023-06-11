@@ -1,3 +1,30 @@
 .is-contact {
 	padding: 0 !important;
 }
+
+.carousel {
+	height: 100%;
+
+	.styles-module_item-tracker__3bypy {
+		gap: 1em;
+	}
+
+	&.is-transition {
+		.styles-module_item-tracker__3bypy {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100% !important;
+			transform: none !important;
+		}
+
+		.styles-module_item-container__a8zaY {
+			position: absolute;
+		}
+	}
+
+	.styles-module_item-provider__YgMwz {
+		overflow: visible;
+	}
+
+}

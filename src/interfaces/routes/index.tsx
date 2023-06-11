@@ -1,7 +1,6 @@
-import { Routes, Route, useLocation, Outlet } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from '../presentation/components/Header.tsx'
-import Footer from '../presentation/components/Footer.tsx'
 import HomePage from '../controllers/HomeControllers.tsx'
 import GalleryPage from '../controllers/GalleryControllers.tsx'
 import AboutPage from '../controllers/AboutControllers.tsx'
@@ -29,7 +28,6 @@ export default function AppLayoutContainer() {
               <AppLayout isPage={'home'}>
                 <Header />
                 <HomePage />
-                {/* <Footer /> */}
               </AppLayout>
             }
           />

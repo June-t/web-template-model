@@ -1,4 +1,47 @@
-export const About = () => {
+import React, { Fragment } from 'react'
+export const About = ({ isInterview, isFaq }) => {
+  type Interview = {
+    name: string
+    agency: string
+    age: number | string
+    height: string
+    placeOfBirth: string
+  }
+
+  type Faq = {
+    question: string
+    answer: string
+  }
+
+  type Property = Interview | Faq
+
+  const QuestionAnswer = ({ property }: { property: Property }) => {
+    const questionAnswerObj = Object.entries(property)
+    if (Array.isArray(property)) {
+      return (
+        <>
+          {property.map((item, index) => (
+            <div className="question_answer" key={index}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </div>
+          ))}
+        </>
+      )
+    } else {
+      return (
+        <>
+          {questionAnswerObj.map(([key, value]) => (
+            <div className="question_answer" key={key}>
+              <h3>{key}</h3>
+              <p>{value}</p>
+            </div>
+          ))}
+        </>
+      )
+    }
+  }
+
   return (
     <>
       <main className="about">
@@ -6,57 +49,12 @@ export const About = () => {
         <hr />
         <div className="about__content">
           <div className="content__enterview">
-            <h2>entrevista</h2>
-
-            <div className="question_answer">
-              <h3>nombre</h3>
-              <p>Chantal G. Crespo</p>
-            </div>
-            <div className="question_answer">
-              <h3>agencia</h3>
-              <p>model</p>
-            </div>
-            <div className="question_answer">
-              <h3>edad</h3>
-              <p>23</p>
-            </div>
-            <div className="question_answer">
-              <h3>altura</h3>
-              <p>5'10"</p>
-            </div>
-            <div className="question_answer">
-              <h3>lugar de origen</h3>
-              <p>venezuela, maracay</p>
-            </div>
+            <h2>interview</h2>
+            <QuestionAnswer property={isInterview} />
           </div>
           <div className="content__faq">
             <h2>faq</h2>
-
-            <div className="question_answer">
-              <h3>
-                DID YOU ALWAYS WANT TO BE A MODEL? TELL US ABOUT HOW YOU WERE
-                DISCOVERED.
-              </h3>
-              <p>
-                I USED TO WANT TO BE A DENTIST LIKE MY PARENTS, BU THEN I GOT
-                SCOUTED BY A MAGAZINE EDITOR IN HOUSTON AND MOVED TO NEW YORK
-                WHEN I WAS 15.
-              </p>
-            </div>
-            <div className="question_answer">
-              <h3>MOST MEMORABLE MODELING EXPERIENCE SO FAR?</h3>
-              <p>
-                WALKING THE GUCCI TWINSBURG SHOW WITH MY SISTER WAS SO EMOTIONAL
-                AND UNFORGETTABLE.
-              </p>
-            </div>
-            <div className="question_answer">
-              <h3>ONE SONG YOU HAVE ON REPEAT, AND WHY?</h3>
-              <p>
-                LET NO MAN PUT ASUNDER BY FIRST CHOICE (DAM SWINDLE REMIX)
-                BECAUSE IT'S SUPER FUNKY AND JOYFUL
-              </p>
-            </div>
+            <QuestionAnswer property={isFaq} />
           </div>
         </div>
       </main>

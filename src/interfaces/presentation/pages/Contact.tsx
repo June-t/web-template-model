@@ -1,4 +1,23 @@
-export const Contact = () => {
+/* eslint-disable @typescript-eslint/no-extra-semi */
+import { Fragment } from 'react'
+
+export const Contact = ({ isPhone, isEmail, isSocial }) => {
+  type SocialMedia = {
+    [key: string]: string
+  }
+
+  const SocialMediaLinks = ({ SocialMedia }: SocialMedia) => {
+    const socialLinks = Object.entries(SocialMedia)
+
+    return (
+      <Fragment>
+        {socialLinks.map(([key, value]) => (
+          <a href={value}>{key}</a>
+        ))}
+      </Fragment>
+    )
+  }
+
   return (
     <>
       <main className="contact">
@@ -8,12 +27,11 @@ export const Contact = () => {
         <div className="contact__information">
           <div className="information__links">
             <div className="links__address">
-              <a href="#">(58) 984-123</a>
-              <a href="#">allie.razo@hotmail.com</a>
+              <a href={isPhone}>{isPhone}</a>
+              <a href={isEmail}>{isEmail}</a>
             </div>
             <div className="links__social">
-              <a href="#">instragram</a>
-              <a href="#">facebook</a>
+              <SocialMediaLinks SocialMedia={isSocial} />
             </div>
           </div>
           <div className="information__message">

@@ -11,7 +11,7 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>Chantal G. Crespo</h3>
+          <h3>nastya HAIKO</h3>
           <nav className="header__desktop">
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -84,12 +84,12 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>Home</h3>
+          <h3>nastya HAIKO</h3>
           <div className="header__button" ref={headerMenu} onClick={handleMenu}>
             <span></span>
             <span></span>
           </div>
-          <nav className="header__mobile">
+          {/* <nav className="header__mobile">
             <div className="mobile__links">
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
@@ -99,7 +99,7 @@ export const Header = () => {
               <span>Chantal G. Crespo</span>
               <p>© 2023</p>
             </div>
-          </nav>
+          </nav> */}
         </header>
       </>
     )

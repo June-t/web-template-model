@@ -1,17 +1,37 @@
 import { useLayoutEffect, useRef } from 'react'
+import { Carousel } from '@trendyol-js/react-carousel'
 import Arrow from '../components/Arrow'
-import { toTransitionElements } from '../../animations/animationAll'
+import {
+  toTransitionElements,
+  toShowElements,
+} from '../../animations/animationAll'
 
 export const Home = () => {
   const GalleryRef = useRef<HTMLDivElement>(null)
 
-  // FLIP" is an animation technique that stands for "First", "Last", "Invert", "Play" and was coined by Paul Lewis. Here's a demo of how it works
-
   useLayoutEffect(() => {
     // const ctx = gsap.context(() => {}, GalleryRef)
-    document.querySelector('.home__content').addEventListener('click', () => {
-      toTransitionElements()
-    })
+    // toTransitionElements()
+
+    setTimeout(() => {
+      let contentDiv = document.querySelector('.content__options')
+      let carouselElement: HTMLElement =
+        document.querySelector('.carousel').childNodes
+
+      carouselElement[0].classList.add('btn-prev')
+      carouselElement[2].classList.add('btn-next')
+      contentDiv?.appendChild(document.querySelector('.btn-prev'))
+      contentDiv?.appendChild(document.querySelector('.btn-next'))
+    }, 0)
+
+    document
+      .querySelectorAll('.home__content .gallery__item')
+      .forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          toShowElements()
+        })
+      })
+
     // return ctx.revert()
   }, [])
 
@@ -21,72 +41,90 @@ export const Home = () => {
         <div className="home__content">
           <div className="content__title">
             <span>hello i'm</span>
-            <span>francesco</span>
-            <span>gioia</span>
+            <span>NASTYA</span>
+            <span>HAIKO</span>
           </div>
           <div className="content__image">
-            <div className="gallery__item">
-              <img
-                src="https://mediaslide-europe.storage.googleapis.com/selectivemgmt/pictures/314/6582/large-1665240872-0a553875dfbcbc77318ebee98f60e9ed.jpg?v=1665240926"
-                alt=""
-              />
-              <div className="item__text">
-                <h3>notes on vision</h3>
-                <span>12 images</span>
+            <Carousel
+              show={4}
+              slide={1}
+              transition={0.5}
+              className="carousel is-transition"
+              rightArrow={<Arrow />}
+              leftArrow={<Arrow />}
+            >
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/selectivemgmt/pictures/314/6582/large-1665240872-0a553875dfbcbc77318ebee98f60e9ed.jpg?v=1665240926"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>ROMANCE R.R</h3>
+                  <span>12 images</span>
+                </div>
               </div>
-            </div>
-            <div className="gallery__item">
-              <img
-                src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1643101941-93e818192174e4073f5ce9624209051b.jpg"
-                alt=""
-              />
-              <div className="item__text">
-                <h3>notes on vision</h3>
-                <span>12 images</span>
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1643101941-93e818192174e4073f5ce9624209051b.jpg"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>PH PHOTOS</h3>
+                  <span>12 images</span>
+                </div>
               </div>
-            </div>
-            <div className="gallery__item">
-              <img
-                src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1670928449-5287aeaf3bf4760091e6b973d061a8f0.jpg"
-                alt=""
-              />
-              <div className="item__text">
-                <h3>notes on vision</h3>
-                <span>12 images</span>
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1670928449-5287aeaf3bf4760091e6b973d061a8f0.jpg"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>NAME ORDINARY</h3>
+                  <span>12 images</span>
+                </div>
               </div>
-            </div>
-            <div className="gallery__item">
-              <img
-                src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642759591-3e0bec0350eac8dba83f589e638fdcd5.jpg"
-                alt=""
-              />
-              <div className="item__text">
-                <h3>notes on vision</h3>
-                <span>12 images</span>
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642759591-3e0bec0350eac8dba83f589e638fdcd5.jpg"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>ORDINATY PH</h3>
+                  <span>12 images</span>
+                </div>
               </div>
-            </div>
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642759591-3e0bec0350eac8dba83f589e638fdcd5.jpg"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>ORDINATY PH</h3>
+                  <span>12 images</span>
+                </div>
+              </div>
+              <div className="gallery__item">
+                <img
+                  src="https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642759591-3e0bec0350eac8dba83f589e638fdcd5.jpg"
+                  alt=""
+                />
+                <div className="item__text">
+                  <h3>ORDINATY PH</h3>
+                  <span>12 images</span>
+                </div>
+              </div>
+            </Carousel>
           </div>
         </div>
         <div className="home__indicators">
-          <div className="content__options">
-            <div className="options__previus">
-              <button>
-                <Arrow />
-              </button>
-            </div>
-            <div className="options__next">
-              <button>
-                <Arrow />
-              </button>
-            </div>
-          </div>
+          <div className="content__options"></div>
           <div className="indicators">
-            {/* <hr /> */}
-            <span>04</span>
-            <span>Gallery</span>
+            <hr className="line" />
+            <span className="indicators__number">04</span>
+            <span className="indicators__text">Gallery</span>
           </div>
           <div className="footerExtend">
-            <h3>Chantal G. Crespo</h3>
+            <h3>nastya HAIKO</h3>
             <span>
               A STREET PHOTOGRAPHER <br /> BASED IN LONDON
             </span>
@@ -99,14 +137,3 @@ export const Home = () => {
 }
 
 export default Home
-
-// const tl = gsap.timeline({
-//   paused: true,
-//   ease: 'power3.inOut',
-//   duration: 2,
-//   onComplete: () => {
-//     document.querySelector('.home__content')?.classList.add('is-gallery')
-//   },
-// })
-// tl.to('.gallery__item', { rotate: 0 })
-// tl.play()

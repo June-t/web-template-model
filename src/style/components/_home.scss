@@ -5,13 +5,13 @@
 		display: grid;
 		grid-template-areas: "content" "indicators";
 		grid-template-rows: 1fr max-content;
-		margin: 2em 0;
+		overflow-x: hidden;
 
 		&__content.is-gallery {
 
 			& .content__image {
 				gap: 1em;
-				justify-content: flex-end;
+				justify-content: flex-start;
 
 				& .gallery__item {
 					position: relative;
@@ -24,6 +24,7 @@
 			grid-area: content;
 			width: 100%;
 			height: 100%;
+			margin: 2em 0;
 			position: relative;
 			justify-content: center;
 			display: flex;
@@ -68,7 +69,7 @@
 				position: absolute;
 
 				& img {
-					width: 20vw;
+					width: 100%;
 					height: 50vh;
 					object-fit: cover;
 				}
@@ -81,29 +82,17 @@
 					width: auto;
 					height: fit-content;
 					text-align: center;
-					position: absolute;
+					align-items: center;
+					// position: absolute;
 					gap: 1em;
+					cursor: pointer;
 
 					& .item__text {
 						opacity: 0;
 						// visibility: hidden;
 					}
 				}
-
-				& .gallery__item:nth-child(3) {
-					// transform: rotate(5deg);
-				}
-
-				& .gallery__item:nth-child(2) {
-					// transform: rotate(10deg);
-				}
-
-				& .gallery__item:nth-child(1) {
-					// transform: rotate(15deg);
-				}
-
 			}
-
 		}
 
 		&__indicators {
@@ -120,19 +109,16 @@
 				justify-content: flex-end;
 				gap: 1em;
 				opacity: 0;
+				z-index: 999999;
 
-				& .options__next {
+				& div {
+					@extend %btn;
+				}
+
+				& .btn-next {
 					& svg {
 						transform: rotate(180deg);
 					}
-				}
-
-				& button {
-					background: #0000;
-					border: 1px solid var(--color-secondary);
-					border-radius: 3rem;
-					width: 50px;
-					height: 50px;
 				}
 			}
 
@@ -143,6 +129,7 @@
 				justify-content: space-between;
 				text-transform: uppercase;
 				position: relative;
+				overflow: hidden;
 			}
 
 			& hr {

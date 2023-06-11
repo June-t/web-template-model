@@ -1,0 +1,61 @@
+{
+	"about": {
+		"interview": {
+			"name": "nastya HAIKO",
+			"agency": "lineupmodels",
+			"age": 28,
+			"height": "178CM/5' 10'",
+			"placeOfBirth": "Russian"
+		},
+		"faq": [
+			{
+				"question": "What is your work experience?",
+				"answer": "I have worked in various companies for the last 5 years."
+			},
+			{
+				"question": "What are your main skills?",
+				"answer": "Fashion photography, portrait photography, product photography, event photography, real estate photography, wedding photography, and industrial photography."
+			},
+			{
+				"question": "Are you available to travel?",
+				"answer": "Yes, I am available to travel both nationally and internationally."
+			}
+		]
+	},
+	"contact": {
+		"phone": "+1 123-456-7890",
+		"email": "johndoe@example.com",
+		"socialMedia": {
+			"facebook": "https://www.facebook.com/johndoe",
+			"twitter": "https://www.twitter.com/johndoe",
+			"instagram": "https://www.instagram.com/johndoe"
+		}
+	},
+	"home": {
+		"collection": [
+			{
+				"name": "Photo 1",
+				"imageURL": "https://example.com/photo1.jpg"
+			},
+			{
+				"name": "Photo 1",
+				"imageURL": "https://example.com/photo1.jpg"
+			}
+		]
+	},
+	"others": {
+		"header": {
+			"logo": "Nastya Haiko",
+			"menu": {
+				"home": "Home",
+				"about": "About",
+				"contact": "Contact"
+			}
+		},
+		"footer": {
+			"logo": "Nastya Haiko",
+			"message": "A STREET PHOTOGRAPHER BASED IN LONDON",
+			"year": "©2023"
+		}
+	}
+}
