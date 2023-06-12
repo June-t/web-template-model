@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
+import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
 export const Contact = ({ isPhone, isEmail, isSocial }) => {
@@ -22,7 +22,9 @@ export const Contact = ({ isPhone, isEmail, isSocial }) => {
     <>
       <main className="contact">
         <div className="contact__background">
-          <a href="/">Home</a>
+          <nav className="header__desktop">
+            <Link to="/">Back</Link>
+          </nav>
         </div>
         <div className="contact__information">
           <div className="information__links">

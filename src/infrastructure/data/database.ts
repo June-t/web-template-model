@@ -4,7 +4,7 @@ enum DB {
   ABOUT = 'about',
   CONTACT = 'contact',
   HOME = 'home',
-  OTHER = 'other',
+  OTHER = 'others',
 }
 
 const getContactInformation = () => {

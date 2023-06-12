@@ -68,7 +68,17 @@ export const toTransitionElements = () => {
       })
       return LAST
     })
-    .to('.item__text', { opacity: 1, duration: 0.5 }, '>=+2')
+    .fromTo(
+      '.item__text',
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        duration: 0.5,
+      },
+      '>=+2'
+    )
     .fromTo(
       '.indicators',
       {
@@ -91,6 +101,7 @@ export const toTransitionElements = () => {
       '-=0.5'
     )
     .to('.content__options', { opacity: 1 }, '+=0.2')
+    .to('.content__options svg', { opacity: 1 }, '<')
     .fromTo('.indicators .line', { opacity: 0 }, { opacity: 1 }, '>=-0.5')
     .then(() => {
       timeline.kill()
@@ -105,8 +116,8 @@ export const toShowElements = () => {
   const indicatorsText = document.querySelector('.indicators__text')
 
   const timeline = gsap.timeline({
-    ease: 'Power2.easeOut',
-    duration: 0.2,
+    ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
+    duration: 0.3,
   })
 
   timeline.add(invertedTextUtility(indicatorsNumber))

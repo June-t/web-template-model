@@ -1,6 +1,6 @@
 interface HomeModel {
-  interview: object
-  faq: object
+  name: object
+  collection: any
 }
 
 export default HomeModel

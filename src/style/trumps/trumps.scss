@@ -9,6 +9,10 @@
 		gap: 1em;
 	}
 
+	& svg {
+		opacity: 0;
+	}
+
 	&.is-transition {
 		.styles-module_item-tracker__3bypy {
 			display: flex;
@@ -25,6 +29,7 @@
 
 	.styles-module_item-provider__YgMwz {
 		overflow: visible;
+		cursor: auto;
 	}
 
 }

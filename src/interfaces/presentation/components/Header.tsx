@@ -1,7 +1,14 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
+import { OtherContainer } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
 import gsap from 'gsap'
+
+type Header = {
+  logo: string
+}
+
+const { logo }: Header = OtherContainer().header
 
 export const Header = () => {
   const { width } = useWindowSize()
@@ -11,7 +18,7 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>nastya HAIKO</h3>
+          <h3>{logo}</h3>
           <nav className="header__desktop">
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -84,7 +91,7 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>nastya HAIKO</h3>
+          <h3>{logo}</h3>
           <div className="header__button" ref={headerMenu} onClick={handleMenu}>
             <span></span>
             <span></span>

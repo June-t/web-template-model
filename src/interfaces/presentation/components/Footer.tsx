@@ -1,12 +1,19 @@
+import { OtherContainer } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
+
+type Footer = {
+  logo: string
+  message: string
+  year: string
+}
+const { logo, message, year }: Footer = OtherContainer().footer
+
 export const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <h3>nastya HAIKO</h3>
-        <span>
-          A STREET PHOTOGRAPHER <br /> BASED IN LONDON
-        </span>
-        <span>©2023</span>
+        <h3>{logo}</h3>
+        <span>{message}</span>
+        <span>{year}</span>
       </footer>
     </>
   )
