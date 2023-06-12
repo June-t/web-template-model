@@ -3,12 +3,14 @@ gsap.registerPlugin(Flip)
 
 /* ANIMATION HOME PAGE STEPS: 
   
-  1) — LOADER ANIMATION           [PENDING]
-  2) — CHANGE TEXT                [PENDING]
-  3) — TRANSITION ELEMENTS        [PENDING]
+  1) — LOADER ANIMATION           [PENDING]\
+    . 1.1) — SHOW COUNTER
+    . 1.2) — ELEMENTS MIDLE
+  2) — CHANGE TEXT                [READY?]
+  3) — TRANSITION ELEMENTS        [READY]
   4) — SHOW GALLERY ELEMENTS      [PENDING]
   
-  */
+*/
 
 gsap.config({
   force3D: true,
@@ -21,6 +23,13 @@ const invertedTextUtility = (target: gsap.TweenTarget) => {
   tl.to(target, { y: '0vh' })
 
   return tl
+}
+
+export const toLoaderAnimation = () => {
+  const timeline = gsap.timeline({
+    paused: true,
+    ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
+  })
 }
 
 export const toTransitionElements = () => {
