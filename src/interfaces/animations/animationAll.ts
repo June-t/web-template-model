@@ -26,10 +26,88 @@ const invertedTextUtility = (target: gsap.TweenTarget) => {
 }
 
 export const toLoaderAnimation = () => {
+  const toContent = document.querySelector('.home__content')
+  const toContainer = document.querySelector('.loader__counter')
   const timeline = gsap.timeline({
     paused: true,
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
   })
+
+  timeline
+    .set(['.header', '.footerExtend', '.content__title', '.item__text'], {
+      opacity: 0,
+      visibility: 'hidden',
+    })
+    .set('.home__content', { className: 'home__content is-loader' })
+
+  timeline
+    .add(() => {
+      const STATE = Flip.getState('.loader__counter')
+      toContainer?.classList.add('is-active')
+      const LAST = Flip.from(STATE, {
+        ease: 'power3.inOut',
+        duration: 2,
+        stagger: 0.1,
+      })
+      return LAST
+    })
+    .to('.loader__counter span', { opacity: 1, duration: 0.5 }, '+=0.5')
+    .to(
+      '.loader__counter span',
+      {
+        duration: 1.5,
+        innerHTML: 100,
+        roundProps: 'innerHTML',
+        onUpdate: function () {
+          const counter = document.querySelector('loader__counter span')
+          if (counter) {
+            counter.textContent = Math.round(
+              this.targets()[0].innerHTML
+            ).toString()
+          }
+        },
+      },
+      '<'
+    )
+    .to('.loader__counter span', { opacity: 0, duration: 0.5 }, '+=0.5')
+    .to('.loader__counter', { background: '#0000' }, '>')
+    .to('.item__img img', { opacity: 1, duration: 0.5 }, '<')
+    .to('.item__img', { width: '100%', duration: 0.5 }, '<')
+    .to('.styles-module_item-container__a8zaY', { visibility: 'visible' }, '>')
+    .to(
+      '.styles-module_item-container__a8zaY',
+      { opacity: 1, duration: 0.5 },
+      '<'
+    )
+    .add(() => {
+      const STATE = Flip.getState('.styles-module_item-container__a8zaY')
+      toContent?.classList.add('loader-rotate')
+      const LAST = Flip.from(STATE, {
+        ease: 'power3.inOut',
+        duration: 1,
+        stagger: 0.05,
+      })
+      return LAST
+    })
+    .then(() => {
+      document
+        .querySelectorAll('.home__content .loader__counter')
+        .forEach((e) => {
+          e.remove()
+        })
+    })
+
+  timeline.set(['.header', '.footerExtend', '.content__title'], {
+    visibility: 'visible',
+  })
+  timeline.to(['.header', '.footerExtend', '.content__title'], { opacity: 1 })
+  timeline.to(
+    '.content__title span',
+    { top: '0vh', stagger: 0.05, duration: 0.5 },
+    '<'
+  )
+
+  timeline.play()
 }
 
 export const toTransitionElements = () => {
@@ -40,6 +118,11 @@ export const toTransitionElements = () => {
   })
 
   timeline
+    .to('.styles-module_item-container__a8zaY', {
+      rotate: 0,
+      y: 0,
+      duration: 0.5,
+    })
     .to('.content__image', { y: '-5%', duration: 0.5 })
     .fromTo(
       '.content__title span',
@@ -113,6 +196,7 @@ export const toTransitionElements = () => {
     .to('.content__options svg', { opacity: 1 }, '<')
     .fromTo('.indicators .line', { opacity: 0 }, { opacity: 1 }, '>=-0.5')
     .then(() => {
+      document.querySelector('.home__content')?.classList.remove('is-loader')
       timeline.kill()
     })
 

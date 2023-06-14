@@ -1,10 +1,12 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useState, useRef } from 'react'
 import { Carousel } from '@trendyol-js/react-carousel'
-import Arrow from '../components/Arrow'
+import gsap from 'gsap'
 import {
   toTransitionElements,
   toShowElements,
+  toLoaderAnimation,
 } from '../../animations/animationAll'
+import Arrow from '../components/Arrow'
 
 type Name = {
   first: string
@@ -12,15 +14,28 @@ type Name = {
 }
 
 export const Home = ({ isName, isGallery }) => {
+  const [loader, setLoader] = useState(0)
   const URL = '/photographs/nastyhaiko/'
   const { first, last }: Name = isName
   const collection: string[] = isGallery
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const LoaderCounter = () => {
+    return (
+      <div className="loader__counter">
+        <span>0</span>
+      </div>
+    )
+  }
 
   const ItemGallery = ({ name, file, gallery }) => {
     const previewImage = gallery[0]
     return (
-      <div className="gallery__item">
-        <img src={`${URL}/${file}/${previewImage}`} alt="" />
+      <div className="gallery__item" onMouseEnter={toShowElements}>
+        <div className="item__img">
+          {loader === 0 ? <LoaderCounter /> : null}
+          <img src={`${URL}/${file}/${previewImage}`} alt="" />
+        </div>
         <div className="item__text">
           <h3>{name}</h3>
           <span>{gallery.length} images</span>
@@ -40,28 +55,30 @@ export const Home = ({ isName, isGallery }) => {
   }
 
   useLayoutEffect(() => {
-    const elementsGallery = document
-      .querySelectorAll('.gallery__item')
-      .forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-          toShowElements()
-        })
-      })
+    const ctx = gsap.context(() => {
+      setTimeout(() => {
+        toLoaderAnimation()
+        resetCarousel()
+      }, 0)
+    }, containerRef)
 
-    setTimeout(() => {
-      resetCarousel()
-      // toTransitionElements()
-    }, 0)
+    return () => ctx.revert()
   }, [])
 
   return (
     <>
-      <main className="home">
+      <main className="home" ref={containerRef}>
         <div className="home__content">
           <div className="content__title">
-            <span>hello i'm</span>
-            <span>{first}</span>
-            <span>{last}</span>
+            <div className="mask">
+              <span>hello i'm</span>
+            </div>
+            <div className="mask">
+              <span>{first}</span>
+            </div>
+            <div className="mask">
+              <span>{last}</span>
+            </div>
           </div>
           <div className="content__image">
             <Carousel
