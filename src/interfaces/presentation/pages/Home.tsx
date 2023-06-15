@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useRef } from 'react'
+import { useLayoutEffect, useState, useRef, Fragment } from 'react'
 import { Carousel } from '@trendyol-js/react-carousel'
 import gsap from 'gsap'
 import {
@@ -31,7 +31,12 @@ export const Home = ({ isName, isGallery }) => {
   const ItemGallery = ({ name, file, gallery }) => {
     const previewImage = gallery[0]
     return (
-      <div className="gallery__item" onMouseEnter={toShowElements}>
+      <div
+        className="gallery__item"
+        onMouseEnter={(e: unknown | any) => {
+          toShowElements(e)
+        }}
+      >
         <div className="item__img">
           {loader === 0 ? <LoaderCounter /> : null}
           <img src={`${URL}/${file}/${previewImage}`} alt="" />
@@ -56,6 +61,16 @@ export const Home = ({ isName, isGallery }) => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const tl = gsap.timeline()
+      const elementTransition = document.querySelector('.home__content')
+
+      const handleClick = (): void => {
+        toTransitionElements()
+        elementTransition.removeEventListener('click', handleClick)
+      }
+
+      elementTransition.addEventListener('click', handleClick)
+
       setTimeout(() => {
         toLoaderAnimation()
         resetCarousel()
@@ -91,12 +106,13 @@ export const Home = ({ isName, isGallery }) => {
             >
               {collection.map((item, index) => {
                 return (
-                  <ItemGallery
-                    key={index}
-                    name={item['name']}
-                    file={item['file']}
-                    gallery={item['gallery']}
-                  />
+                  <Fragment key={index}>
+                    <ItemGallery
+                      name={item['name']}
+                      file={item['file']}
+                      gallery={item['gallery']}
+                    />
+                  </Fragment>
                 )
               })}
             </Carousel>

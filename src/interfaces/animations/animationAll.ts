@@ -16,12 +16,16 @@ gsap.config({
   force3D: true,
 })
 
-const invertedTextUtility = (target: gsap.TweenTarget) => {
+const extractNumber = (cadena: string) => {
+  const regex = /\d+/g // Expresión regular para encontrar números
+  const numerosEncontrados = cadena.match(regex)
+  return numerosEncontrados
+}
+
+const invertedTextUtility = (target: any, element: any) => {
   const tl = gsap.timeline()
   tl.to(target, { y: '-20vh' })
   tl.set(target, { y: '20vh' })
-  tl.to(target, { y: '0vh' })
-
   return tl
 }
 
@@ -113,7 +117,6 @@ export const toLoaderAnimation = () => {
 export const toTransitionElements = () => {
   const toContainer = document.querySelector('.carousel')
   const timeline = gsap.timeline({
-    paused: true,
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
   })
 
@@ -164,6 +167,7 @@ export const toTransitionElements = () => {
       '.item__text',
       {
         opacity: 0,
+        visibility: 'visible',
       },
       {
         opacity: 1,
@@ -195,26 +199,35 @@ export const toTransitionElements = () => {
     .to('.content__options', { opacity: 1 }, '+=0.2')
     .to('.content__options svg', { opacity: 1 }, '<')
     .fromTo('.indicators .line', { opacity: 0 }, { opacity: 1 }, '>=-0.5')
+    .set('.content__title', { visibility: 'hidden' })
     .then(() => {
       document.querySelector('.home__content')?.classList.remove('is-loader')
       timeline.kill()
     })
 
   timeline.play()
-  return timeline
 }
 
-export const toShowElements = () => {
+export const toShowElements = (element: any) => {
   const indicatorsNumber = document.querySelector('.indicators__number')
   const indicatorsText = document.querySelector('.indicators__text')
+  const elementText =
+    element.currentTarget?.querySelector('.item__text h3')?.textContent
+  const elementTotal =
+    element.currentTarget?.querySelector('.item__text span')?.textContent
 
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
     duration: 0.3,
   })
 
-  timeline.add(invertedTextUtility(indicatorsNumber))
-  timeline.add(invertedTextUtility(indicatorsText), '<')
+  timeline.add(invertedTextUtility(indicatorsNumber, element))
+  timeline.add(invertedTextUtility(indicatorsText, element), '<')
+  timeline.add(() => {
+    indicatorsNumber.innerHTML = `${extractNumber(elementTotal)}`
+    indicatorsText.innerHTML = elementText
+  })
+  timeline.to([indicatorsNumber, indicatorsText], { y: '0vh' }, '>')
 
   timeline.play()
 }

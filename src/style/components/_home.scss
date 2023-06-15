@@ -203,6 +203,7 @@
 				opacity: 0;
 				z-index: 999999;
 
+
 				& div {
 					@extend %btn;
 				}
@@ -215,13 +216,19 @@
 			}
 
 			& .indicators {
-				font-size: 120px;
+				font-size: 100px;
 				display: none;
 				// display: flex;
 				justify-content: space-between;
 				text-transform: uppercase;
 				position: relative;
 				overflow: hidden;
+
+				&__text {
+					text-align: end;
+					width: max-content;
+					align-self: center;
+				}
 			}
 
 			& hr {
