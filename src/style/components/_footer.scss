@@ -14,4 +14,15 @@
 
 .footerExtend {
 	@extend .footer;
+
+	& .credits {
+
+		@each $media in md,
+		sm,
+		mb {
+			@include media($media) {
+				display: none;
+			}
+		}
+	}
 }

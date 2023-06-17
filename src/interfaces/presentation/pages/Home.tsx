@@ -1,11 +1,13 @@
 import { useLayoutEffect, useState, useRef, Fragment } from 'react'
-import { Carousel } from '@trendyol-js/react-carousel'
+import { useWindowSize } from 'usehooks-ts'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import {
   toTransitionElements,
   toShowElements,
   toLoaderAnimation,
 } from '../../animations/animationAll'
+import { Carousel } from '@trendyol-js/react-carousel'
 import Arrow from '../components/Arrow'
 
 type Name = {
@@ -15,6 +17,7 @@ type Name = {
 
 export const Home = ({ isName, isGallery }) => {
   const [loader, setLoader] = useState(0)
+  const { width } = useWindowSize()
   const URL = '/photographs/nastyhaiko/'
   const { first, last }: Name = isName
   const collection: string[] = isGallery
@@ -45,6 +48,7 @@ export const Home = ({ isName, isGallery }) => {
           <h3>{name}</h3>
           <span>{gallery.length} images</span>
         </div>
+        <Link to={`/${file}`} className="item__link"></Link>
       </div>
     )
   }
@@ -59,9 +63,64 @@ export const Home = ({ isName, isGallery }) => {
     }
   }
 
+  const CarouselDesktop = () => {
+    return (
+      <Fragment>
+        <Carousel
+          show={4}
+          slide={1}
+          transition={0.5}
+          className="carousel is-transition"
+          responsive={true}
+          rightArrow={<Arrow />}
+          leftArrow={<Arrow />}
+        >
+          {collection.map((item, index) => {
+            return (
+              <Fragment key={index}>
+                <ItemGallery
+                  name={item['name']}
+                  file={item['file']}
+                  gallery={item['gallery']}
+                />
+              </Fragment>
+            )
+          })}
+        </Carousel>
+      </Fragment>
+    )
+  }
+
+  const CarouselMobile = () => {
+    return (
+      <Fragment>
+        <Carousel
+          show={1}
+          slide={1}
+          transition={0.5}
+          responsive={false}
+          className="carousel is-transition"
+          rightArrow={<Arrow />}
+          leftArrow={<Arrow />}
+        >
+          {collection.map((item, index) => {
+            return (
+              <Fragment key={index}>
+                <ItemGallery
+                  name={item['name']}
+                  file={item['file']}
+                  gallery={item['gallery']}
+                />
+              </Fragment>
+            )
+          })}
+        </Carousel>
+      </Fragment>
+    )
+  }
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline()
       const elementTransition = document.querySelector('.home__content')
 
       const handleClick = (): void => {
@@ -96,26 +155,7 @@ export const Home = ({ isName, isGallery }) => {
             </div>
           </div>
           <div className="content__image">
-            <Carousel
-              show={4}
-              slide={1}
-              transition={0.5}
-              className="carousel is-transition"
-              rightArrow={<Arrow />}
-              leftArrow={<Arrow />}
-            >
-              {collection.map((item, index) => {
-                return (
-                  <Fragment key={index}>
-                    <ItemGallery
-                      name={item['name']}
-                      file={item['file']}
-                      gallery={item['gallery']}
-                    />
-                  </Fragment>
-                )
-              })}
-            </Carousel>
+            {width && width <= 768 ? <CarouselMobile /> : <CarouselDesktop />}
           </div>
         </div>
         <div className="home__indicators">
@@ -126,8 +166,11 @@ export const Home = ({ isName, isGallery }) => {
             <span className="indicators__text">Gallery</span>
           </div>
           <div className="footerExtend">
-            <h3>Nastya HAIKO</h3>
-            <span>
+            <h3>
+              {first}
+              {last}
+            </h3>
+            <span className="credits">
               Credits to whom <br /> corresponds
             </span>
             <span>©2023</span>

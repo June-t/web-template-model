@@ -4,6 +4,7 @@ enum DB {
   ABOUT = 'about',
   CONTACT = 'contact',
   HOME = 'home',
+  GALLERY = 'home',
   OTHER = 'others',
 }
 
@@ -19,6 +20,10 @@ const getHomeInformation = () => {
   return data[DB.HOME]
 }
 
+const getGalleryInformation = () => {
+  return data[DB.GALLERY]
+}
+
 const getOtherInformation = () => {
   return data[DB.OTHER]
 }
@@ -28,4 +33,5 @@ export {
   getAboutInformation,
   getOtherInformation,
   getHomeInformation,
+  getGalleryInformation,
 }

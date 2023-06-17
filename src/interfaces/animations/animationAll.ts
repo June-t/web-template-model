@@ -42,6 +42,7 @@ export const toLoaderAnimation = () => {
       opacity: 0,
       visibility: 'hidden',
     })
+    .set('.styles-module_item-container__a8zaY', { pointerEvents: 'none' })
     .set('.home__content', { className: 'home__content is-loader' })
 
   timeline
@@ -101,15 +102,17 @@ export const toLoaderAnimation = () => {
         })
     })
 
-  timeline.set(['.header', '.footerExtend', '.content__title'], {
-    visibility: 'visible',
-  })
-  timeline.to(['.header', '.footerExtend', '.content__title'], { opacity: 1 })
-  timeline.to(
-    '.content__title span',
-    { top: '0vh', stagger: 0.05, duration: 0.5 },
-    '<'
-  )
+  timeline
+    .set(['.header', '.footerExtend', '.content__title'], {
+      visibility: 'visible',
+    })
+    .set('.styles-module_item-tracker__3bypy', { cursor: 'pointer' })
+    .to(['.header', '.footerExtend', '.content__title'], { opacity: 1 })
+    .to(
+      '.content__title span',
+      { top: '0vh', stagger: 0.05, duration: 0.5 },
+      '<'
+    )
 
   timeline.play()
 }
@@ -121,12 +124,13 @@ export const toTransitionElements = () => {
   })
 
   timeline
+    .set('.styles-module_item-tracker__3bypy', { cursor: 'auto' })
     .to('.styles-module_item-container__a8zaY', {
       rotate: 0,
       y: 0,
       duration: 0.5,
     })
-    .to('.content__image', { y: '-5%', duration: 0.5 })
+    .to('.content__image', { y: '-2%', duration: 0.5 })
     .fromTo(
       '.content__title span',
       { opacity: 1, y: 0 },
@@ -200,15 +204,19 @@ export const toTransitionElements = () => {
     .to('.content__options svg', { opacity: 1 }, '<')
     .fromTo('.indicators .line', { opacity: 0 }, { opacity: 1 }, '>=-0.5')
     .set('.content__title', { visibility: 'hidden' })
+    .set('.styles-module_item-container__a8zaY', { pointerEvents: 'auto' })
     .then(() => {
       document.querySelector('.home__content')?.classList.remove('is-loader')
+      document
+        .querySelector('.home__content')
+        ?.classList.remove('loader-rotate')
       timeline.kill()
     })
 
   timeline.play()
 }
 
-export const toShowElements = (element: any) => {
+export const toShowElements = (element: HTMLElement | any) => {
   const indicatorsNumber = document.querySelector('.indicators__number')
   const indicatorsText = document.querySelector('.indicators__text')
   const elementText =

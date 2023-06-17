@@ -23,7 +23,7 @@ export const Contact = ({ isPhone, isEmail, isSocial }) => {
       <main className="contact">
         <div className="contact__background">
           <nav className="header__desktop">
-            <Link to="/">Back</Link>
+            <Link to="/">Home</Link>
           </nav>
         </div>
         <div className="contact__information">

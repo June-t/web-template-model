@@ -27,6 +27,14 @@
 	justify-content: center;
 	align-items: center;
 	transition: all 0.2s ease-in;
+
+	@each $media in md,
+	sm,
+	mb {
+		@include media($media) {
+			width: 100%;
+		}
+	}
 }
 
 %btn:hover {

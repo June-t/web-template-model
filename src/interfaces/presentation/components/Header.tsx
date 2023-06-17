@@ -6,9 +6,10 @@ import gsap from 'gsap'
 
 type Header = {
   logo: string
+  years: string
 }
 
-const { logo }: Header = OtherContainer().header
+const { logo, year }: Header = OtherContainer().header
 
 export const Header = () => {
   const { width } = useWindowSize()
@@ -43,9 +44,10 @@ export const Header = () => {
     const openMenu = () => {
       const tl = gsap.timeline({ ease: 'power3.inOut' })
 
+      tl.set('.template', { overflow: 'hidden' })
       tl.fromTo(
         '.header__mobile',
-        { height: '0vh', opacity: 0 },
+        { height: '0vh', opacity: 0, visibility: 'visible' },
         { height: '100vh', opacity: 1, duration: 0.5 }
       )
 
@@ -86,6 +88,8 @@ export const Header = () => {
         { height: '0vh', opacity: 0, duration: 1 },
         '>+0.5'
       )
+      tl.set('.header__mobile', { visibility: 'hidden' })
+      tl.set('.template', { overflow: 'auto' })
     }
 
     return (
@@ -96,17 +100,17 @@ export const Header = () => {
             <span></span>
             <span></span>
           </div>
-          {/* <nav className="header__mobile">
+          <nav className="header__mobile">
             <div className="mobile__links">
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
               <Link to="/contact">Contact</Link>
             </div>
             <div className="mobile__footer">
-              <span>Chantal G. Crespo</span>
-              <p>© 2023</p>
+              <span>{logo}</span>
+              <p>{year}</p>
             </div>
-          </nav> */}
+          </nav>
         </header>
       </>
     )
