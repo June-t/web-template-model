@@ -35,9 +35,13 @@ export const toLoaderAnimation = () => {
   const timeline = gsap.timeline({
     paused: true,
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
+    onComplete: () => {
+      timeline.clear(true)
+    },
   })
 
   timeline
+    .set('.template.is-home', { opacity: 1 })
     .set(['.header', '.footerExtend', '.content__title', '.item__text'], {
       opacity: 0,
       visibility: 'hidden',
@@ -121,6 +125,9 @@ export const toTransitionElements = () => {
   const toContainer = document.querySelector('.carousel')
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
+    onComplete: () => {
+      timeline.clear(true)
+    },
   })
 
   timeline
@@ -227,6 +234,9 @@ export const toShowElements = (element: HTMLElement | any) => {
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
     duration: 0.3,
+    onComplete: () => {
+      timeline.clear(true)
+    },
   })
 
   timeline.add(invertedTextUtility(indicatorsNumber, element))

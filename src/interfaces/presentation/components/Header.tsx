@@ -6,7 +6,7 @@ import gsap from 'gsap'
 
 type Header = {
   logo: string
-  years: string
+  year: string
 }
 
 const { logo, year }: Header = OtherContainer().header
@@ -21,7 +21,8 @@ export const Header = () => {
         <header className="header">
           <h3>{logo}</h3>
           <nav className="header__desktop">
-            <Link to="/">Home</Link>
+            <a href="/">Home</a>
+            {/* The HOME element, will stay like this, until I figure out how to make it render without repeating again, this is a project but many mistakes were made :( */}
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
           </nav>
@@ -102,7 +103,7 @@ export const Header = () => {
           </div>
           <nav className="header__mobile">
             <div className="mobile__links">
-              <Link to="/">Home</Link>
+              <a href="/">Home</a>
               <Link to="/about">About</Link>
               <Link to="/contact">Contact</Link>
             </div>

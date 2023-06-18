@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useRef, Fragment } from 'react'
+import React, { useLayoutEffect, useRef, Fragment, useEffect } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
@@ -15,9 +15,9 @@ type Name = {
   last: string
 }
 
-export const Home = ({ isName, isGallery }) => {
-  const [loader, setLoader] = useState(0)
+const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
+  const loader = false
   const URL = '/photographs/nastyhaiko/'
   const { first, last }: Name = isName
   const collection: string[] = isGallery
@@ -36,12 +36,12 @@ export const Home = ({ isName, isGallery }) => {
     return (
       <div
         className="gallery__item"
-        onMouseEnter={(e: unknown | any) => {
+        onMouseEnter={(e: unknown) => {
           toShowElements(e)
         }}
       >
         <div className="item__img">
-          {loader === 0 ? <LoaderCounter /> : null}
+          {!loader ? <LoaderCounter /> : null}
           <img src={`${URL}/${file}/${previewImage}`} alt="" />
         </div>
         <div className="item__text">
@@ -54,12 +54,17 @@ export const Home = ({ isName, isGallery }) => {
   }
 
   const resetCarousel = () => {
-    const carouselElement = document.querySelector('.carousel')?.childNodes
+    const carouselElement = document.querySelector('.carousel')
+      ?.childNodes as NodeListOf<HTMLElement>
     const contentDiv = document.querySelector('.content__options')
-    if (carouselElement) {
-      carouselElement[0].classList.add('btn-prev')
-      carouselElement[2].classList.add('btn-next')
-      contentDiv?.append(carouselElement[0], carouselElement[2])
+    try {
+      if (carouselElement) {
+        carouselElement[0].classList.add('btn-prev')
+        carouselElement[2].classList.add('btn-next')
+        contentDiv?.append(carouselElement[0], carouselElement[2])
+      }
+    } catch (error) {
+      return null
     }
   }
 
@@ -74,10 +79,11 @@ export const Home = ({ isName, isGallery }) => {
           responsive={true}
           rightArrow={<Arrow />}
           leftArrow={<Arrow />}
+          key={crypto.randomUUID()}
         >
-          {collection.map((item, index) => {
+          {collection.map((item) => {
             return (
-              <Fragment key={index}>
+              <Fragment key={crypto.randomUUID()}>
                 <ItemGallery
                   name={item['name']}
                   file={item['file']}
@@ -103,9 +109,9 @@ export const Home = ({ isName, isGallery }) => {
           rightArrow={<Arrow />}
           leftArrow={<Arrow />}
         >
-          {collection.map((item, index) => {
+          {collection.map((item) => {
             return (
-              <Fragment key={index}>
+              <Fragment key={crypto.randomUUID()}>
                 <ItemGallery
                   name={item['name']}
                   file={item['file']}
@@ -120,23 +126,37 @@ export const Home = ({ isName, isGallery }) => {
   }
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const elementTransition = document.querySelector('.home__content')
+    const elementTransition = document.querySelector('.home__content')
 
-      const handleClick = (): void => {
-        toTransitionElements()
-        elementTransition.removeEventListener('click', handleClick)
-      }
+    const handleClick = (): void => {
+      toTransitionElements()
+      elementTransition.removeEventListener('click', handleClick)
+    }
 
+    if (elementTransition) {
       elementTransition.addEventListener('click', handleClick)
 
       setTimeout(() => {
         toLoaderAnimation()
         resetCarousel()
       }, 0)
-    }, containerRef)
+    }
 
-    return () => ctx.revert()
+    return () => {
+      if (elementTransition) {
+        elementTransition.removeEventListener('click', handleClick)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    // Lógica de efecto, se ejecuta después de renderizar el componente
+    console.log('Componente montado')
+
+    return () => {
+      // Lógica de efecto, se ejecuta antes de desmontar el componente
+      console.log('Componente desmontado')
+    }
   }, [])
 
   return (
