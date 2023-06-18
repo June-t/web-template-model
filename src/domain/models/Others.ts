@@ -1,6 +1,6 @@
 interface OthersModel {
-  header: object
-  footer: object
+  header: any
+  footer: any
 }
 
 export default OthersModel

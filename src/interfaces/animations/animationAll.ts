@@ -22,7 +22,7 @@ const extractNumber = (cadena: string) => {
   return numerosEncontrados
 }
 
-const invertedTextUtility = (target: any, element: any) => {
+const invertedTextUtility = (target: any) => {
   const tl = gsap.timeline()
   tl.to(target, { y: '-20vh' })
   tl.set(target, { y: '20vh' })
@@ -239,8 +239,8 @@ export const toShowElements = (element: HTMLElement | any) => {
     },
   })
 
-  timeline.add(invertedTextUtility(indicatorsNumber, element))
-  timeline.add(invertedTextUtility(indicatorsText, element), '<')
+  timeline.add(invertedTextUtility(indicatorsNumber))
+  timeline.add(invertedTextUtility(indicatorsText), '<')
   timeline.add(() => {
     indicatorsNumber.innerHTML = `${extractNumber(elementTotal)}`
     indicatorsText.innerHTML = elementText

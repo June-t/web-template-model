@@ -1,7 +1,6 @@
-import React, { useLayoutEffect, useRef, Fragment, useEffect } from 'react'
+import { useLayoutEffect, useRef, Fragment, useEffect } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
-import gsap from 'gsap'
 import {
   toTransitionElements,
   toShowElements,

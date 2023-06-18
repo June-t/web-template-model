@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react'
 export const About = ({ isInterview, isFaq }) => {
   type Interview = {
     name: string

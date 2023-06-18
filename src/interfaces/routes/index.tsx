@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from '../presentation/components/Header.tsx'
 import { HomeControllers } from '../controllers/HomeControllers.tsx'
 import GalleryPage from '../controllers/GalleryControllers.tsx'

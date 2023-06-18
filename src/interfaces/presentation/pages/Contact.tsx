@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
 export const Contact = ({ isPhone, isEmail, isSocial }) => {
