@@ -1,6 +1,3 @@
-import { Carousel } from '@trendyol-js/react-carousel'
-import Arrow from '../components/Arrow'
-
 type GalleryProps = {
   content: string | object
   id: any
@@ -19,15 +16,6 @@ export const Gallery = ({ content, id }: GalleryProps) => {
 
   return (
     <main className="gallery">
-      <Carousel
-        show={1}
-        slide={1}
-        transition={0.5}
-        className="is-gallery "
-        rightArrow={<Arrow />}
-        leftArrow={<Arrow />}
-        children={galleryItems}
-      />
       <div className="gallery__total">
         <span>
           {gallery.lenght > 10 ? '' : '0'}

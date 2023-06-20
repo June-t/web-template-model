@@ -1,18 +1,12 @@
 import { useRef, useState, useEffect, Fragment } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
-import {
-  toTransitionElements,
-  toShowElements,
-  toLoaderAnimation,
-} from '../../animations/animationAll'
-import { Carousel } from '@trendyol-js/react-carousel'
-import Arrow from '../components/Arrow'
+import { toShowElements } from '../../animations/animationAll'
 
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
-  const [loader, setLoader] = useState<boolean>(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [loader, setLoader] = useState<boolean>(true)
+  const containerRef = useRef(null)
   const name: string = isName
   const collection: string[] = isGallery
   const nameArray: string[] = name.split(' ')
@@ -28,6 +22,7 @@ const Home = ({ isName, isGallery }) => {
   const ItemGallery = ({ name, file, gallery }) => {
     const previewImage = gallery[0]
     const URL = '/photographs/nastyhaiko/'
+
     return (
       <div
         className="gallery__item"
@@ -37,7 +32,7 @@ const Home = ({ isName, isGallery }) => {
         key={crypto.randomUUID()}
       >
         <div className="item__img">
-          {loader === false ? <LoaderCounter /> : <LoaderCounter />}
+          {loader && <LoaderCounter />}
           <img src={`${URL}/${file}/${previewImage}`} alt={file} />
         </div>
         <div className="item__text">
@@ -49,89 +44,17 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
-  const CarouselDesktop = () => {
-    return (
-      <Fragment>
-        <Carousel
-          show={4}
-          slide={1}
-          transition={0.5}
-          className="carousel is-transition"
-          responsive={true}
-          rightArrow={<Arrow />}
-          leftArrow={<Arrow />}
-          key={crypto.randomUUID()}
-        >
-          {collection.map((item) => {
-            return (
-              <Fragment key={crypto.randomUUID()}>
-                <ItemGallery
-                  name={item['name']}
-                  file={item['file']}
-                  gallery={item['gallery']}
-                />
-              </Fragment>
-            )
-          })}
-        </Carousel>
-      </Fragment>
-    )
-  }
-
-  const CarouselMobile = () => {
-    return (
-      <Fragment>
-        <Carousel
-          show={1}
-          slide={1}
-          transition={0.5}
-          responsive={false}
-          className="carousel is-transition"
-          rightArrow={<Arrow />}
-          leftArrow={<Arrow />}
-        >
-          {collection.map((item) => {
-            return (
-              <Fragment key={crypto.randomUUID()}>
-                <ItemGallery
-                  name={item['name']}
-                  file={item['file']}
-                  gallery={item['gallery']}
-                />
-              </Fragment>
-            )
-          })}
-        </Carousel>
-      </Fragment>
-    )
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      toLoaderAnimation()
-      setTimeout(() => {
-        // toTransitionElements()
-      }, 5000)
-    }, 0)
-  }, [])
-
   return (
     <>
       <main className="home" ref={containerRef}>
         <div className="home__content">
           <div className="content__title">
-            <div className="mask">
-              <span>hello i'm</span>
-            </div>
-            <div className="mask">
-              <span>{nameArray[0]}</span>
-            </div>
-            <div className="mask">
-              <span>{nameArray[nameArray.length - 1]}</span>
-            </div>
+            <span>hello i'm</span>
+            <span>{nameArray[0]}</span>
+            <span>{nameArray[nameArray.length - 1]}</span>
           </div>
           <div className="content__image">
-            {width && width <= 768 ? <CarouselMobile /> : <CarouselDesktop />}
+            {width && width <= 768 ? <span>mobile</span> : <span>Desktop</span>}
           </div>
         </div>
         <div className="home__indicators">
