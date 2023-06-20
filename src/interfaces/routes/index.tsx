@@ -1,9 +1,11 @@
+import React, { lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from '../presentation/components/Header.tsx'
 import HomePage from '../controllers/HomeControllers.tsx'
 import GalleryPage from '../controllers/GalleryControllers.tsx'
 import AboutPage from '../controllers/AboutControllers.tsx'
 import ContactPage from '../controllers/ContactControllers.tsx'
+
 import {
   getHome,
   getCollection,
@@ -20,45 +22,47 @@ export default function AppLayoutContainer() {
   const { collection } = getCollection
 
   return (
-    <Routes location={location}>
-      <Route
-        path="/"
-        element={
-          <AppLayout isPage={'home'}>
-            <Header />
-            <HomePage content={getHome} />
-          </AppLayout>
-        }
-      />
-      {collection.map((item, index) => (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes location={location}>
         <Route
-          key={item.file}
-          path={`/${item.file}`}
+          path="/"
           element={
-            <AppLayout isPage={'gallery'}>
+            <AppLayout isPage={'home'}>
               <Header />
-              <GalleryPage content={item.gallery} identifier={index} />
+              <HomePage content={getHome} />
             </AppLayout>
           }
         />
-      ))}
-      <Route
-        path="/about"
-        element={
-          <AppLayout isPage={'about'}>
-            <Header />
-            <AboutPage content={getAbout} />
-          </AppLayout>
-        }
-      />
-      <Route
-        path="/contact"
-        element={
-          <AppLayout isPage={'contact'}>
-            <ContactPage content={getContact} />
-          </AppLayout>
-        }
-      />
-    </Routes>
+        {collection.map((item, index) => (
+          <Route
+            key={item.file}
+            path={`/${item.file}`}
+            element={
+              <AppLayout isPage={'gallery'}>
+                <Header />
+                <GalleryPage content={item.gallery} identifier={index} />
+              </AppLayout>
+            }
+          />
+        ))}
+        <Route
+          path="/about"
+          element={
+            <AppLayout isPage={'about'}>
+              <Header />
+              <AboutPage content={getAbout} />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <AppLayout isPage={'contact'}>
+              <ContactPage content={getContact} />
+            </AppLayout>
+          }
+        />
+      </Routes>
+    </Suspense>
   )
 }

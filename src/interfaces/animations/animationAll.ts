@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Flip, gsap } from 'gsap/all'
 gsap.registerPlugin(Flip)
 
@@ -25,6 +26,9 @@ export const toLoaderAnimation = () => {
   const timeline = gsap.timeline({
     paused: true,
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
+    onComplete: () => {
+      timeline.kill()
+    },
   })
 
   timeline
@@ -105,6 +109,9 @@ export const toTransitionElements = () => {
   const toContainer = document.querySelector('.carousel')
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
+    onComplete: () => {
+      timeline.kill()
+    },
   })
 
   timeline
@@ -211,6 +218,9 @@ export const toShowElements = (element: HTMLElement | any) => {
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
     duration: 0.3,
+    onComplete: () => {
+      timeline.kill()
+    },
   })
 
   timeline.add(invertedTextUtility(indicatorsNumber))

@@ -11,7 +11,9 @@ export const Contact = ({ isPhone, isEmail, isSocial }) => {
     return (
       <>
         {socialLinks.map(([key, value]) => (
-          <a href={value}>{key}</a>
+          <a key={crypto.randomUUID()} href={value}>
+            {key}
+          </a>
         ))}
       </>
     )

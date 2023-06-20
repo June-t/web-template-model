@@ -1,4 +1,4 @@
-import { useRef, useState, useLayoutEffect, Fragment } from 'react'
+import { useRef, useState, useEffect, Fragment } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
 import {
@@ -15,7 +15,6 @@ const Home = ({ isName, isGallery }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const name: string = isName
   const collection: string[] = isGallery
-
   const nameArray: string[] = name.split(' ')
 
   const LoaderCounter = () => {
@@ -35,10 +34,11 @@ const Home = ({ isName, isGallery }) => {
         onMouseEnter={(e: unknown) => {
           toShowElements(e)
         }}
+        key={crypto.randomUUID()}
       >
         <div className="item__img">
-          {loader === false ? <LoaderCounter /> : null}
-          <img src={`${URL}/${file}/${previewImage}`} alt="" />
+          {loader === false ? <LoaderCounter /> : <LoaderCounter />}
+          <img src={`${URL}/${file}/${previewImage}`} alt={file} />
         </div>
         <div className="item__text">
           <h3>{name}</h3>
@@ -106,9 +106,12 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       toLoaderAnimation()
+      setTimeout(() => {
+        // toTransitionElements()
+      }, 5000)
     }, 0)
   }, [])
 
