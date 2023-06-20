@@ -1,4 +1,6 @@
 export const About = ({ isInterview, isFaq }) => {
+  console.log(isFaq, isInterview)
+
   type Interview = {
     name: string
     agency: string

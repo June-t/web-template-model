@@ -1,10 +1,15 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from '../presentation/components/Header.tsx'
-import { HomeControllers } from '../controllers/HomeControllers.tsx'
+import HomePage from '../controllers/HomeControllers.tsx'
 import GalleryPage from '../controllers/GalleryControllers.tsx'
 import AboutPage from '../controllers/AboutControllers.tsx'
 import ContactPage from '../controllers/ContactControllers.tsx'
-import { getGalleryInformation } from '../../infrastructure/data/database.ts'
+import {
+  getHome,
+  getCollection,
+  getAbout,
+  getContact,
+} from '../../infrastructure/repositories/InfoRepositoryImpl.ts'
 
 const AppLayout = ({ children, isPage }) => {
   return <div className={'template ' + `${'is-' + isPage}`}>{children}</div>
@@ -12,7 +17,7 @@ const AppLayout = ({ children, isPage }) => {
 
 export default function AppLayoutContainer() {
   const location = useLocation()
-  const collection = getGalleryInformation().collection
+  const { collection } = getCollection
 
   return (
     <Routes location={location}>
@@ -21,7 +26,7 @@ export default function AppLayoutContainer() {
         element={
           <AppLayout isPage={'home'}>
             <Header />
-            <HomeControllers />
+            <HomePage content={getHome} />
           </AppLayout>
         }
       />
@@ -32,7 +37,7 @@ export default function AppLayoutContainer() {
           element={
             <AppLayout isPage={'gallery'}>
               <Header />
-              <GalleryPage identifier={index} />
+              <GalleryPage content={item.gallery} identifier={index} />
             </AppLayout>
           }
         />
@@ -42,7 +47,7 @@ export default function AppLayoutContainer() {
         element={
           <AppLayout isPage={'about'}>
             <Header />
-            <AboutPage />
+            <AboutPage content={getAbout} />
           </AppLayout>
         }
       />
@@ -50,7 +55,7 @@ export default function AppLayoutContainer() {
         path="/contact"
         element={
           <AppLayout isPage={'contact'}>
-            <ContactPage />
+            <ContactPage content={getContact} />
           </AppLayout>
         }
       />

@@ -1,17 +1,6 @@
 import { Flip, gsap } from 'gsap/all'
 gsap.registerPlugin(Flip)
 
-/* ANIMATION HOME PAGE STEPS: 
-  
-  1) — LOADER ANIMATION           [PENDING]\
-    . 1.1) — SHOW COUNTER
-    . 1.2) — ELEMENTS MIDLE
-  2) — CHANGE TEXT                [READY?]
-  3) — TRANSITION ELEMENTS        [READY]
-  4) — SHOW GALLERY ELEMENTS      [PENDING]
-  
-*/
-
 gsap.config({
   force3D: true,
 })
@@ -32,12 +21,10 @@ const invertedTextUtility = (target: any) => {
 export const toLoaderAnimation = () => {
   const toContent = document.querySelector('.home__content')
   const toContainer = document.querySelector('.loader__counter')
+
   const timeline = gsap.timeline({
     paused: true,
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
-    onComplete: () => {
-      timeline.clear(true)
-    },
   })
 
   timeline
@@ -68,7 +55,7 @@ export const toLoaderAnimation = () => {
         innerHTML: 100,
         roundProps: 'innerHTML',
         onUpdate: function () {
-          const counter = document.querySelector('loader__counter span')
+          const counter = document.querySelector('.loader__counter span')
           if (counter) {
             counter.textContent = Math.round(
               this.targets()[0].innerHTML
@@ -89,14 +76,7 @@ export const toLoaderAnimation = () => {
       '<'
     )
     .add(() => {
-      const STATE = Flip.getState('.styles-module_item-container__a8zaY')
       toContent?.classList.add('loader-rotate')
-      const LAST = Flip.from(STATE, {
-        ease: 'power3.inOut',
-        duration: 1,
-        stagger: 0.05,
-      })
-      return LAST
     })
     .then(() => {
       document
@@ -125,9 +105,6 @@ export const toTransitionElements = () => {
   const toContainer = document.querySelector('.carousel')
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.55,0.06,0.68,0.19);',
-    onComplete: () => {
-      timeline.clear(true)
-    },
   })
 
   timeline
@@ -234,9 +211,6 @@ export const toShowElements = (element: HTMLElement | any) => {
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
     duration: 0.3,
-    onComplete: () => {
-      timeline.clear(true)
-    },
   })
 
   timeline.add(invertedTextUtility(indicatorsNumber))

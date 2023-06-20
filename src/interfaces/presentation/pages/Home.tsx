@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, Fragment, useEffect } from 'react'
+import { useRef, useState, useLayoutEffect, Fragment } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
 import {
@@ -9,18 +9,14 @@ import {
 import { Carousel } from '@trendyol-js/react-carousel'
 import Arrow from '../components/Arrow'
 
-type Name = {
-  first: string
-  last: string
-}
-
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
-  const loader = false
-  const URL = '/photographs/nastyhaiko/'
-  const { first, last }: Name = isName
-  const collection: string[] = isGallery
+  const [loader, setLoader] = useState<boolean>(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const name: string = isName
+  const collection: string[] = isGallery
+
+  const nameArray: string[] = name.split(' ')
 
   const LoaderCounter = () => {
     return (
@@ -32,6 +28,7 @@ const Home = ({ isName, isGallery }) => {
 
   const ItemGallery = ({ name, file, gallery }) => {
     const previewImage = gallery[0]
+    const URL = '/photographs/nastyhaiko/'
     return (
       <div
         className="gallery__item"
@@ -40,7 +37,7 @@ const Home = ({ isName, isGallery }) => {
         }}
       >
         <div className="item__img">
-          {!loader ? <LoaderCounter /> : null}
+          {loader === false ? <LoaderCounter /> : null}
           <img src={`${URL}/${file}/${previewImage}`} alt="" />
         </div>
         <div className="item__text">
@@ -50,21 +47,6 @@ const Home = ({ isName, isGallery }) => {
         <Link to={`/${file}`} className="item__link"></Link>
       </div>
     )
-  }
-
-  const resetCarousel = () => {
-    const carouselElement = document.querySelector('.carousel')
-      ?.childNodes as NodeListOf<HTMLElement>
-    const contentDiv = document.querySelector('.content__options')
-    try {
-      if (carouselElement) {
-        carouselElement[0].classList.add('btn-prev')
-        carouselElement[2].classList.add('btn-next')
-        contentDiv?.append(carouselElement[0], carouselElement[2])
-      }
-    } catch (error) {
-      return null
-    }
   }
 
   const CarouselDesktop = () => {
@@ -125,37 +107,9 @@ const Home = ({ isName, isGallery }) => {
   }
 
   useLayoutEffect(() => {
-    const elementTransition = document.querySelector('.home__content')
-
-    const handleClick = (): void => {
-      toTransitionElements()
-      elementTransition.removeEventListener('click', handleClick)
-    }
-
-    if (elementTransition) {
-      elementTransition.addEventListener('click', handleClick)
-
-      setTimeout(() => {
-        toLoaderAnimation()
-        resetCarousel()
-      }, 0)
-    }
-
-    return () => {
-      if (elementTransition) {
-        elementTransition.removeEventListener('click', handleClick)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    // Lógica de efecto, se ejecuta después de renderizar el componente
-    console.log('Componente montado')
-
-    return () => {
-      // Lógica de efecto, se ejecuta antes de desmontar el componente
-      console.log('Componente desmontado')
-    }
+    setTimeout(() => {
+      toLoaderAnimation()
+    }, 0)
   }, [])
 
   return (
@@ -167,10 +121,10 @@ const Home = ({ isName, isGallery }) => {
               <span>hello i'm</span>
             </div>
             <div className="mask">
-              <span>{first}</span>
+              <span>{nameArray[0]}</span>
             </div>
             <div className="mask">
-              <span>{last}</span>
+              <span>{nameArray[nameArray.length - 1]}</span>
             </div>
           </div>
           <div className="content__image">
@@ -185,10 +139,7 @@ const Home = ({ isName, isGallery }) => {
             <span className="indicators__text">Gallery</span>
           </div>
           <div className="footerExtend">
-            <h3>
-              {first}
-              {last}
-            </h3>
+            <h3>{name}</h3>
             <span className="credits">
               Credits to whom <br /> corresponds
             </span>

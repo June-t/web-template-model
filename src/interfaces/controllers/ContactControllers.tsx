@@ -1,9 +1,7 @@
 import Contact from '../presentation/pages/Contact.tsx'
-import { contactContainer } from '../../infrastructure/repositories/InfoRepositoryImpl.ts'
 
-const { phone, email, socialMedia } = contactContainer()
-
-export const ContactControllers = () => {
+export const ContactControllers = ({ content }: any) => {
+  const { phone, email, socialMedia } = content
   return <Contact isPhone={phone} isEmail={email} isSocial={socialMedia} />
 }
 

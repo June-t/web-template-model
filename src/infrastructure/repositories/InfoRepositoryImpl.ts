@@ -1,40 +1,19 @@
-import ContactModel from '../../domain/models/Contact'
-import AboutModel from '../../domain/models/About'
-import OtherModel from '../../domain/models/Others'
-import HomeModel from '../../domain/models/Home'
-import GalleryModel from '../../domain/models/Gallery'
-import {
-  getContactInformation,
-  getAboutInformation,
-  getOtherInformation,
-  getHomeInformation,
-  getGalleryInformation,
-} from '../data/database'
+import database from '../data/db'
 
-const contactContainer = (): ContactModel => {
-  return getContactInformation()
+enum InfoRepositoryImpl {
+  home = 'home',
+  collection = 'home',
+  about = 'about',
+  contact = 'contact',
+  additional = 'additional',
 }
 
-const AboutContainer = (): AboutModel => {
-  return getAboutInformation()
-}
+export const getHome = database[InfoRepositoryImpl.home]
 
-const HomeContainer = (): HomeModel => {
-  return getHomeInformation()
-}
+export const getAbout = database[InfoRepositoryImpl.about]
 
-const GalleryContainer = (): GalleryModel => {
-  return getGalleryInformation()
-}
+export const getCollection = database[InfoRepositoryImpl.collection]
 
-const OtherContainer = (): OtherModel => {
-  return getOtherInformation()
-}
+export const getContact = database[InfoRepositoryImpl.contact]
 
-export {
-  contactContainer,
-  AboutContainer,
-  HomeContainer,
-  OtherContainer,
-  GalleryContainer,
-}
+export const getAdditional = database[InfoRepositoryImpl.additional]

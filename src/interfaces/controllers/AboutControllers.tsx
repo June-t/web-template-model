@@ -1,9 +1,8 @@
 import About from '../presentation/pages/About.tsx'
-import { AboutContainer } from '../../infrastructure/repositories/InfoRepositoryImpl.ts'
 
-const { interview, faq } = AboutContainer()
+export const AboutControllers = ({ content }: any) => {
+  const { faq, interview } = content
 
-export const AboutControllers = () => {
   return <About isInterview={interview} isFaq={faq} />
 }
 

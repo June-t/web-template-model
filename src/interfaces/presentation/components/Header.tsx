@@ -1,15 +1,10 @@
 import { useRef } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
-import { OtherContainer } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
+import { getAdditional } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
 import gsap from 'gsap'
 
-type Header = {
-  logo: string
-  year: string
-}
-
-const { logo, year }: Header = OtherContainer().header
+const { full_name, year } = getAdditional
 
 export const Header = () => {
   const { width } = useWindowSize()
@@ -19,9 +14,9 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>{logo}</h3>
+          <h3>{full_name}</h3>
           <nav className="header__desktop">
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
             {/* The HOME element, will stay like this, until I figure out how to make it render without repeating again, this is a project but many mistakes were made :( */}
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
@@ -96,7 +91,7 @@ export const Header = () => {
     return (
       <>
         <header className="header">
-          <h3>{logo}</h3>
+          <h3>{full_name}</h3>
           <div className="header__button" ref={headerMenu} onClick={handleMenu}>
             <span></span>
             <span></span>
@@ -108,7 +103,7 @@ export const Header = () => {
               <Link to="/contact">Contact</Link>
             </div>
             <div className="mobile__footer">
-              <span>{logo}</span>
+              <span>{full_name}</span>
               <p>{year}</p>
             </div>
           </nav>

@@ -1,9 +1,13 @@
 import Home from '../presentation/pages/Home.tsx'
-import { HomeContainer } from '../../infrastructure/repositories/InfoRepositoryImpl.ts'
-const { name, collection } = HomeContainer()
 
-export const HomeControllers = () => {
-  return <Home isName={name} isGallery={collection} />
+export const HomeControllers = ({ content }: any) => {
+  interface Content {
+    full_name: string
+    collection: unknown
+  }
+
+  const { full_name, collection }: Content = content
+  return <Home isName={full_name} isGallery={collection} />
 }
 
 export default HomeControllers

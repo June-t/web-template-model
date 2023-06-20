@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 
 export const Contact = ({ isPhone, isEmail, isSocial }) => {
   type SocialMedia = {
@@ -9,11 +9,11 @@ export const Contact = ({ isPhone, isEmail, isSocial }) => {
     const socialLinks = Object.entries(SocialMedia)
 
     return (
-      <Fragment>
+      <>
         {socialLinks.map(([key, value]) => (
           <a href={value}>{key}</a>
         ))}
-      </Fragment>
+      </>
     )
   }
 
@@ -22,7 +22,7 @@ export const Contact = ({ isPhone, isEmail, isSocial }) => {
       <main className="contact">
         <div className="contact__background">
           <nav className="header__desktop">
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </nav>
         </div>
         <div className="contact__information">
