@@ -1,7 +1,13 @@
 import { useRef, useState, useEffect, Fragment } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
-import { toShowElements } from '../../animations/animationAll'
+import { Flip, gsap } from 'gsap/all'
+gsap.registerPlugin(Flip)
+import {
+  toShowElements,
+  animationExpandImages,
+} from '../../animations/animationAll'
+import SimpleSlider from '../components/Slider'
 
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
@@ -44,21 +50,90 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
+  useEffect(() => {
+    // const ctx = gsap.context(() => {
+
+    // }, containerRef)
+
+    setTimeout(() => {
+      const timeline = gsap.timeline()
+
+      // COUNTER LOADER [01/03]
+      timeline
+        .to('.loader__counter span', { opacity: 1 }, '+=0.5')
+        .to(
+          '.loader__counter span',
+          {
+            duration: 2.5,
+            innerHTML: 100,
+            roundProps: 'innerHTML',
+            onUpdate: function () {
+              const counter = document.querySelector('.loader__counter span')
+              if (counter) {
+                counter.textContent = Math.round(
+                  this.targets()[0].innerHTML
+                ).toString()
+              }
+            },
+          },
+          '<'
+        )
+        .to('.item__img', { height: '50vh', duration: 2 }, '<')
+        .to('.loader__counter span', { opacity: 0, duration: 0.5 }, '+=0.5')
+      // FIRST IMAGE [02/03]
+      timeline
+        .to('.item__img', { width: '100%', duration: 2 }, '<')
+        .to('.item__img', { background: '#0000' }, '<')
+        .to('.item__img img', { opacity: 1 }, '<')
+
+      // ALL IMAGE ROTATE [03/03]
+
+      // gsap.utils
+      //   .toArray('.gallery__item img')
+      //   .forEach((container: any, i: any) => {
+      //     timeline.to(container, {
+      //       rotate: 5 * i,
+      //       y: 5 * i,
+      //       stagger: 0.05,
+      //     })
+      //   })
+    }, 1000)
+  }, [])
+
   return (
     <>
       <main className="home" ref={containerRef}>
-        <div className="home__content">
+        <div className="home__content state-transition-loader">
           <div className="content__title">
-            <span>hello i'm</span>
-            <span>{nameArray[0]}</span>
-            <span>{nameArray[nameArray.length - 1]}</span>
+            <div className="mask">
+              <span>hello i'm</span>
+            </div>
+            <div className="mask">
+              <span>{nameArray[0]}</span>
+            </div>
+            <div className="mask">
+              <span>{nameArray[nameArray.length - 1]}</span>
+            </div>
           </div>
-          <div className="content__image">
-            {width && width <= 768 ? <span>mobile</span> : <span>Desktop</span>}
+          <div className="content__image carousel-midle">
+            {/* {width && width <= 768 ? <span>mobile</span> : <span>Desktop</span>} */}
+
+            <SimpleSlider>
+              {collection.map((item: any) => {
+                return (
+                  <Fragment key={crypto.randomUUID()}>
+                    <ItemGallery
+                      name={item.name}
+                      file={item.file}
+                      gallery={item.gallery}
+                    />
+                  </Fragment>
+                )
+              })}
+            </SimpleSlider>
           </div>
         </div>
         <div className="home__indicators">
-          <div className="content__options"></div>
           <div className="indicators">
             <hr className="line" />
             <span className="indicators__number">04</span>

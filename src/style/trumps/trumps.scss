@@ -14,3 +14,42 @@
 	}
 
 }
+
+.slick-slider {
+	width: 100% !important;
+}
+
+.slick-track {
+	display: flex;
+	grid-gap: 1em;
+}
+
+.content__image>div:nth-child(1) {
+	width: 100%;
+}
+
+
+/* COLOCAR LOS ELEMENTOS EN EL MEDIO*/
+
+.carousel-midle {
+
+	& .slick-slide {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
+
+	& .slick-track {
+		height: 50vh;
+		position: absolute;
+		width: 100% !important;
+		transform: none !important;
+	}
+
+	& .slick-list {
+		height: 50vh;
+		overflow: inherit !important;
+	}
+
+}
