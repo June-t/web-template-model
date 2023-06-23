@@ -5,17 +5,20 @@ import { Flip, gsap } from 'gsap/all'
 gsap.registerPlugin(Flip)
 import {
   toShowElements,
-  animationExpandImages,
+  toLoaderAnimaton,
+  toExpandElementsAnimation,
 } from '../../animations/animationAll'
 import SimpleSlider from '../components/Slider'
 
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
   const [loader, setLoader] = useState<boolean>(true)
-  const containerRef = useRef(null)
   const name: string = isName
   const collection: string[] = isGallery
   const nameArray: string[] = name.split(' ')
+
+  const containerRef = useRef(null)
+  const SliderRef = useRef(null)
 
   const LoaderCounter = () => {
     return (
@@ -50,60 +53,16 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
-  useEffect(() => {
-    // const ctx = gsap.context(() => {
+  toLoaderAnimaton()
 
-    // }, containerRef)
-
-    setTimeout(() => {
-      const timeline = gsap.timeline()
-
-      // COUNTER LOADER [01/03]
-      timeline
-        .to('.loader__counter span', { opacity: 1 }, '+=0.5')
-        .to(
-          '.loader__counter span',
-          {
-            duration: 2.5,
-            innerHTML: 100,
-            roundProps: 'innerHTML',
-            onUpdate: function () {
-              const counter = document.querySelector('.loader__counter span')
-              if (counter) {
-                counter.textContent = Math.round(
-                  this.targets()[0].innerHTML
-                ).toString()
-              }
-            },
-          },
-          '<'
-        )
-        .to('.item__img', { height: '50vh', duration: 2 }, '<')
-        .to('.loader__counter span', { opacity: 0, duration: 0.5 }, '+=0.5')
-      // FIRST IMAGE [02/03]
-      timeline
-        .to('.item__img', { width: '100%', duration: 2 }, '<')
-        .to('.item__img', { background: '#0000' }, '<')
-        .to('.item__img img', { opacity: 1 }, '<')
-
-      // ALL IMAGE ROTATE [03/03]
-
-      // gsap.utils
-      //   .toArray('.gallery__item img')
-      //   .forEach((container: any, i: any) => {
-      //     timeline.to(container, {
-      //       rotate: 5 * i,
-      //       y: 5 * i,
-      //       stagger: 0.05,
-      //     })
-      //   })
-    }, 1000)
-  }, [])
+  setTimeout(() => {
+    toExpandElementsAnimation()
+  }, 10000)
 
   return (
     <>
       <main className="home" ref={containerRef}>
-        <div className="home__content state-transition-loader">
+        <div className="home__content loader__animation">
           <div className="content__title">
             <div className="mask">
               <span>hello i'm</span>

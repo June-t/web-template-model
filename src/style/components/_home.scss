@@ -26,8 +26,6 @@
 				align-items: flex-start;
 				width: max-content;
 
-				visibility: hidden;
-
 				& .mask {
 					clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
 					width: 100%;
@@ -61,7 +59,7 @@
 				grid-gap: 1em;
 
 				position: absolute;
-				overflow: hidden;
+				// overflow: hidden;
 
 				& .gallery__item {
 					color: var(--color-secondary);
@@ -119,10 +117,31 @@
 		/** LOADER .  LOADER ANIMATION [01/03]
 		
 		ACA SE PONE EL LOADER DE LA PAGINA DE INICIO Y SE ESTABLECE TODO LO RELACIONADO AL CONTADOR PARA EL PROGRESO DE LA CARGA DE LA PAGINA
+
+		TAMBIÉN SE CARGA EL ROTATE PARA LAS IMAGENES
 		
 		**/
 
-		&__content.state-transition-loader {
+		&__content.loader__animation {
+
+			&.animation__rotate {
+
+				& .slick-slide:nth-child(4) .gallery__item img {
+					transform: rotate(5deg) translate(5px, -10px);
+				}
+
+				& .slick-slide:nth-child(3) .gallery__item img {
+					transform: rotate(10deg) translate(5px, -20px);
+				}
+
+				& .slick-slide:nth-child(2) .gallery__item img {
+					transform: rotate(15deg) translate(5px, -30px);
+				}
+			}
+
+			& .slick-slide:nth-last-child(1) .gallery__item img {
+				transform: none !important;
+			}
 
 			& .slick-slide:nth-child(1) .loader__counter {
 				display: flex !important;
@@ -167,6 +186,7 @@
 				& .loader__counter {
 					display: none !important;
 				}
+
 			}
 
 		}
