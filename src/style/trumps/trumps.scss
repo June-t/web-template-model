@@ -49,11 +49,16 @@
 
 	& .slick-list {
 		height: 50vh;
-		overflow: inherit !important;
+
 	}
 
 }
 
 .slick-arrow {
 	display: none !important;
+}
+
+.slick-list {
+	overflow: visible !important;
+
 }

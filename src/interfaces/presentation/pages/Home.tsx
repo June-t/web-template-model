@@ -8,7 +8,6 @@ import {
   toLoaderAnimaton,
   toExpandElementsAnimation,
 } from '../../animations/animationAll'
-import SimpleSlider from '../components/Slider'
 
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
@@ -53,12 +52,6 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
-  toLoaderAnimaton()
-
-  setTimeout(() => {
-    toExpandElementsAnimation()
-  }, 10000)
-
   return (
     <>
       <main className="home" ref={containerRef}>
@@ -76,20 +69,17 @@ const Home = ({ isName, isGallery }) => {
           </div>
           <div className="content__image carousel-midle">
             {/* {width && width <= 768 ? <span>mobile</span> : <span>Desktop</span>} */}
-
-            <SimpleSlider>
-              {collection.map((item: any) => {
-                return (
-                  <Fragment key={crypto.randomUUID()}>
-                    <ItemGallery
-                      name={item.name}
-                      file={item.file}
-                      gallery={item.gallery}
-                    />
-                  </Fragment>
-                )
-              })}
-            </SimpleSlider>
+            {collection.map((item: any) => {
+              return (
+                <Fragment key={crypto.randomUUID()}>
+                  <ItemGallery
+                    name={item.name}
+                    file={item.file}
+                    gallery={item.gallery}
+                  />
+                </Fragment>
+              )
+            })}
           </div>
         </div>
         <div className="home__indicators">

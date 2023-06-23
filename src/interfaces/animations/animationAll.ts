@@ -71,13 +71,13 @@ export const toLoaderAnimaton = () => {
           },
           '<'
         )
-        .to('.item__img', { height: '50vh' }, '<')
+        .to('.item__img', { height: '40vh' }, '<')
         .to('.loader__counter span', { opacity: 0 }, '+=0.5')
       // FIRST IMAGE [02/04]
       timeline
-        .to('.item__img', { width: '100%' }, '<')
+        .to('.item__img', { width: 'auto' }, '<')
+        .fromTo('.item__img img', { opacity: 1 }, { width: '100%' }, '>')
         .to('.item__img', { background: '#0000' }, '<')
-        .to('.item__img img', { opacity: 1 }, '<')
 
       // VISIBILITY SET
 
@@ -97,7 +97,7 @@ export const toLoaderAnimaton = () => {
         toContainer.classList.add('animation__rotate')
         const LAST = Flip.from(STATE, {
           ease: 'power3.inOut',
-          duration: 1,
+          duration: 0.1,
           stagger: 0.1,
         })
 
@@ -135,6 +135,9 @@ export const toExpandElementsAnimation = () => {
     })
     .set('.gallery__item .item__img', {
       height: '100%',
+    })
+    .set('.gallery__item .item__img img', {
+      width: '100%',
     })
 
   // EXPAND INTERIOR [02/04]
