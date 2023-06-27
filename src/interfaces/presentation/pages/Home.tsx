@@ -52,6 +52,12 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
+  toLoaderAnimaton()
+
+  setTimeout(() => {
+    toExpandElementsAnimation()
+  }, 7000)
+
   return (
     <>
       <main className="home" ref={containerRef}>
@@ -67,7 +73,7 @@ const Home = ({ isName, isGallery }) => {
               <span>{nameArray[nameArray.length - 1]}</span>
             </div>
           </div>
-          <div className="content__image carousel-midle">
+          <div className="content__image">
             {/* {width && width <= 768 ? <span>mobile</span> : <span>Desktop</span>} */}
             {collection.map((item: any) => {
               return (
