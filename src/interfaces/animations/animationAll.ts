@@ -103,7 +103,6 @@ export const toLoaderAnimaton = () => {
         toContainer.classList.add('animation__rotate')
         const LAST = Flip.from(STATE, {
           ease: 'power3.inOut',
-          duration: 1,
           stagger: 0.05,
         })
 
@@ -128,9 +127,9 @@ export const toExpandElementsAnimation = () => {
   timeline
     .to(['.content__title span', '.footerExtend'], {
       opacity: 0,
-      duration: 0.5,
       stagger: 0.1,
     })
+    .set(['.content__title span', '.footerExtend'], { display: 'none' })
     .set('.content__title span', {
       visibility: 'hidden',
     })
@@ -143,9 +142,14 @@ export const toExpandElementsAnimation = () => {
     toContainer?.classList.remove('animation__rotate')
     Flip.from(STATE, {
       ease: 'power3.inOut',
-      duration: 1,
       stagger: 0.08,
     })
+  })
+
+  // STYLE SET TRANSITION [OTHERS]
+
+  timeline.set('.home__content', {
+    overflowX: 'hidden',
   })
 
   // EXPAND IMAGE [03/04]
@@ -156,25 +160,39 @@ export const toExpandElementsAnimation = () => {
     toContainer?.classList.remove('loader__animation')
     Flip.from(STATE, {
       ease: 'power3.inOut',
-      duration: 2,
       stagger: 0.1,
     })
   }, '>2')
 
-  // VISIBILITY SET [04/04]
+  // VISIBILITY OTHER ELEMENTS [04/04]
 
-  // timeline.fromTo(
-  //   '.gallery__item .item__text',
-  //   { opacity: 0, visibility: 'visible' },
-  //   { opacity: 1, duration: 1, stagger: 0.1 },
-  //   '>'
-  // )
-  // timeline.fromTo(
-  //   '.indicators',
-  //   { opacity: 0, visibility: 'visible' },
-  //   { opacity: 1, duration: 1, stagger: 0.1 },
-  //   '>'
-  // )
+  timeline.fromTo(
+    '.gallery__item .item__text',
+    { opacity: 0, visibility: 'visible' },
+    { opacity: 1, stagger: 0.1 },
+    '>'
+  )
+
+  timeline.fromTo(
+    '.indicators',
+    { opacity: 0, visibility: 'visible' },
+    { opacity: 1, stagger: 0.1 },
+    '>'
+  )
+
+  timeline.fromTo(
+    '.home__indicators hr',
+    { width: '0%' },
+    { width: '100%' },
+    '>'
+  )
+
+  timeline.fromTo(
+    '.home__indicators .indicators span',
+    { y: '100%' },
+    { y: '0%', stagger: 0.1, duration: 1 },
+    '>'
+  )
 
   return timeline
 }

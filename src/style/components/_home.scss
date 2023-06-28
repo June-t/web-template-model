@@ -15,8 +15,6 @@
 			justify-content: center;
 			align-items: center;
 
-			overflow: hidden;
-
 			& .content__title {
 				position: absolute;
 				z-index: 1;
@@ -75,7 +73,11 @@
 
 					& .item__img {
 						width: auto;
+						height: auto;
 
+						& .loader__counter {
+							display: none !important;
+						}
 
 						& img {
 							width: 300px;
@@ -210,9 +212,8 @@
 			gap: 1em;
 			height: 100%;
 			color: var(--color-secondary);
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-end;
+			display: grid;
+			grid-template-columns: repeat(1, 1fr);
 			overflow: clip;
 
 			& .indicators {
@@ -232,11 +233,21 @@
 				position: relative;
 				overflow: clip;
 
+				// center
+				grid-column: 1 / -1;
+				grid-row: 1 / -1;
+
 				&__text {
 					text-align: end;
 					width: max-content;
 					align-self: center;
 				}
+			}
+
+			& .footerExtend {
+				// center
+				grid-column: 1 / -1;
+				grid-row: 1 / -1;
 			}
 
 			& hr {

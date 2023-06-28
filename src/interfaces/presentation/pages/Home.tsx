@@ -1,8 +1,6 @@
-import { useRef, useState, useEffect, Fragment } from 'react'
+import { useRef, useState, Fragment } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
-import { Flip, gsap } from 'gsap/all'
-gsap.registerPlugin(Flip)
 import {
   toShowElements,
   toLoaderAnimaton,
@@ -86,6 +84,10 @@ const Home = ({ isName, isGallery }) => {
                 </Fragment>
               )
             })}
+          </div>
+          <div className="content__button">
+            <div className="button__previus"></div>
+            <div className="button__next"></div>
           </div>
         </div>
         <div className="home__indicators">
