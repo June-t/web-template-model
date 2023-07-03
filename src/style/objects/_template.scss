@@ -23,18 +23,17 @@
 	background: #0000;
 	border: 1px solid var(--color-secondary);
 	border-radius: 3rem;
-	width: 50px;
-	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	transition: all 0.2s ease-in;
+	@include size(3.125rem, 3.125rem);
 
-	@each $media in md,
-	sm,
-	mb {
+
+	@each $media in xxl,
+	xl {
 		@include media($media) {
-			width: 100%;
+			@include size(6.25rem, 3.125rem);
 		}
 	}
 }

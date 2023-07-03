@@ -89,7 +89,7 @@ export const toLoaderAnimaton = () => {
         .to('.loader__counter', { opacity: 0, duration: 0.2 }, '+=0.5')
       // FIRST IMAGE [02/04]
       timeline
-        .to('.item__img', { background: '#fff0' }, '<')
+        .to('.item__img', { background: '#0000' }, '<-0.3')
         .to('.item__img img', { opacity: 1 }, '>-1')
         .to('.item__img', { width: '100%', duration: 0.5 }, '>')
 
@@ -165,6 +165,12 @@ export const toExpandElementsAnimation = () => {
       stagger: 0.08,
     })
   }, '<')
+
+  timeline.to(
+    ['.item__img', '.item__img img'],
+    { width: '100%', duration: 0.5 },
+    '>'
+  )
 
   // EXPAND IMAGE [03/04]
 
@@ -245,7 +251,7 @@ export const toShowElements = (event: MouseEvent<HTMLElement>) => {
   timeline.add(invertedTextUtility(indicatorsNumber))
   timeline.add(invertedTextUtility(indicatorsText), '<')
   timeline.add(() => {
-    indicatorsNumber.innerHTML = `${extractNumber(elementTotal)}`
+    indicatorsNumber.innerHTML = `${'0' + extractNumber(elementTotal)} `
     indicatorsText.innerHTML = elementText
   })
   timeline.to([indicatorsNumber, indicatorsText], { y: '0vh' }, '>')

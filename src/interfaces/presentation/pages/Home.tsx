@@ -104,7 +104,7 @@ const Home = ({ isName, isGallery }) => {
         <div className="home__content loader__animation">
           <div className="content__title">
             <div className="mask">
-              <span>hello i'm</span>
+              <span>hello, i'm</span>
             </div>
             <div className="mask">
               <span>{nameArray[0]}</span>
@@ -177,7 +177,7 @@ const Home = ({ isName, isGallery }) => {
   toLoaderAnimaton()
 
   setTimeout(() => {
-    toExpandElementsAnimation()
+    // toExpandElementsAnimation()
   }, 5000)
 
   return <>{width && width <= 768 ? <Mobile /> : <Desktop />}</>

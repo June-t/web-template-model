@@ -1,6 +1,5 @@
 	.home {
-		width: 100%;
-		height: 100%;
+		@include size(100%);
 		grid-area: main;
 		display: grid;
 		grid-template-areas: "content" "indicators";
@@ -10,7 +9,7 @@
 
 		&__content {
 			grid-area: content;
-			width: 100%;
+			@include size(100%, auto);
 			height: auto;
 			position: relative;
 			display: flex;
@@ -20,7 +19,7 @@
 
 			& .content__title {
 				position: absolute;
-				z-index: 1;
+				z-index: 2;
 				height: max-content;
 				display: flex;
 				flex-direction: column;
@@ -37,33 +36,45 @@
 				}
 
 				& .mask {
-					clip-path: polygon(100% -10px, 100% 100%, 0px 100%, 0px -10px);
+					clip-path: polygon(150% 0px, 150% 100%, -100% 105.29%, -100% 0px);
 					width: 100%;
 				}
 
 				& span {
 					@include rfs(9.375rem, font-size);
-					@include rfs(6.875rem, line-height);
+					@include rfs(7.5rem, line-height);
+
+					@each $media in xxl,
+					xl {
+						@include media($media) {
+							@include rfs(15rem, font-size);
+							@include rfs(11.25rem, line-height);
+						}
+					}
+
 					color: var(--color-secondary);
 					text-transform: uppercase;
 					font-weight: var(--weight-regular);
 					position: relative;
 				}
 
-				& .mask:nth-child(2)>span:nth-child(1) {
+				& .mask:nth-child(1) span {
+					left: -10%;
+				}
+
+				& .mask:nth-child(2) span {
 					left: 20%;
 				}
 
 
-				& .mask:nth-child(3)>span:nth-child(1) {
-					left: 35%;
+				& .mask:nth-child(3) span {
+					left: 40%;
 				}
 
 			}
 
 			& .content__image {
-				width: 100%;
-				height: 100%;
+				@include size(100%);
 				grid-gap: 1em;
 				display: flex;
 				flex-direction: column;
@@ -84,7 +95,7 @@
 					position: relative;
 
 					& .item__img {
-						width: auto;
+						width: 100%;
 						height: auto;
 
 						& .loader__counter {
@@ -92,8 +103,7 @@
 						}
 
 						& img {
-							width: 100%;
-							height: 50vh;
+							@include size(100%, 50vh);
 							object-fit: cover;
 
 							@each $media in md,
@@ -111,8 +121,7 @@
 					}
 
 					& .item__link {
-						width: 100%;
-						height: 100%;
+						@include size(100%, 100%);
 						position: absolute;
 					}
 				}
@@ -128,13 +137,20 @@
 						transform: rotate(180deg);
 					}
 
-
 					& button {
 						@extend %btn;
 					}
 				}
 			}
 		}
+
+		/** LOADER .  LOADER ANIMATION & ANIMATION ROTATE [01/03]
+		
+		ACA SE PONE EL LOADER DE LA PAGINA DE INICIO Y SE ESTABLECE TODO LO RELACIONADO AL CONTADOR PARA EL PROGRESO DE LA CARGA DE LA PAGINA
+
+		TAMBIÉN SE CARGA EL ROTATE PARA LAS IMAGENES
+		
+		**/
 
 		&__content.mobile__animation {
 			& .content__image {
@@ -186,8 +202,7 @@
 						sm,
 						mb {
 							@include media($media) {
-								width: 100%;
-								height: 100%;
+								@include size(100%, 100%);
 							}
 						}
 					}
@@ -196,23 +211,12 @@
 			}
 		}
 
-
-		/** LOADER .  LOADER ANIMATION & ANIMATION ROTATE [01/03]
-		
-		ACA SE PONE EL LOADER DE LA PAGINA DE INICIO Y SE ESTABLECE TODO LO RELACIONADO AL CONTADOR PARA EL PROGRESO DE LA CARGA DE LA PAGINA
-
-		TAMBIÉN SE CARGA EL ROTATE PARA LAS IMAGENES
-		
-		**/
-
 		&__content.loader__animation {
 
 			& .content__image {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-
-				transform: translateY(10%);
 
 				@each $media in md,
 				sm,
@@ -257,6 +261,7 @@
 
 					& img {
 						opacity: 0;
+						width: 40vh;
 					}
 				}
 
@@ -282,8 +287,7 @@
 			/** SLIDER SWIPPER RESET **/
 
 			.swiper.swiper-initialized.swiper-horizontal {
-				width: 100%;
-				height: 100%;
+				@include size(100%, 100%);
 			}
 
 			.swiper-wrapper {
@@ -340,7 +344,6 @@
 
 
 		&__button {
-			grid-area: button;
 			display: flex;
 			justify-content: flex-end;
 			width: 100%;
