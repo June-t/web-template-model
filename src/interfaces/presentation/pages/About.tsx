@@ -1,3 +1,5 @@
+import { toAboutAnimation } from '../../animations/animationAll'
+
 export const About = ({ isInterview, isFaq }) => {
   type Interview = {
     name: string
@@ -40,6 +42,8 @@ export const About = ({ isInterview, isFaq }) => {
       )
     }
   }
+
+  toAboutAnimation()
 
   return (
     <>

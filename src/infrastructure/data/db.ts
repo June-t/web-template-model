@@ -27,6 +27,7 @@ export const database = {
   contact: {
     phone: '+1 123-456-7890',
     email: 'johndoe@example.com',
+    background: '/photographs/nastyhaiko/contact/background.jpg',
     socialMedia: {
       facebook: 'https://www.facebook.com/johndoe',
       twitter: 'https://www.twitter.com/johndoe',

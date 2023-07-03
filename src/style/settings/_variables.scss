@@ -1,9 +1,13 @@
 :root {
-	--font-theme: 'Moderat', sans-serif;
+	--font-theme: 'Public Sans', sans-serif;
+	;
 	// colors
 	--color-primary: #222222;
 	--color-secondary: #ebece5;
 	--color-tertiary: #565656;
+	// weight
+	--weight-light: 200;
+	--weight-regular: 300;
 }
 
 $media: (

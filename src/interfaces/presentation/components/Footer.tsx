@@ -1,19 +1,20 @@
-import { OtherContainer } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
+// import { getAdditional } from '../../../infrastructure/repositories/InfoRepositoryImpl.ts'
 
-type Footer = {
-  logo: string
-  message: string
-  year: string
-}
-const { logo, message, year }: Footer = OtherContainer().footer
+// type Footer = {
+//   logo: string
+//   message: string
+//   year: string
+// }
+
+// const { logo, message, year }: Footer = getAdditional
 
 export const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <h3>{logo}</h3>
+        {/* <h3>{logo}</h3>
         <span>{message}</span>
-        <span>{year}</span>
+        <span>{year}</span> */}
       </footer>
     </>
   )

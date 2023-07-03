@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from '../presentation/components/Header.tsx'
 import HomePage from '../controllers/HomeControllers.tsx'
-import GalleryPage from '../controllers/GalleryControllers.tsx'
+import GalleryPage from '../presentation/pages/Gallery.tsx'
 import AboutPage from '../controllers/AboutControllers.tsx'
 import ContactPage from '../controllers/ContactControllers.tsx'
 
@@ -33,14 +33,14 @@ export default function AppLayoutContainer() {
             </AppLayout>
           }
         />
-        {collection.map((item, index) => (
+        {collection.map((item) => (
           <Route
             key={item.file}
             path={`/${item.file}`}
             element={
               <AppLayout isPage={'gallery'}>
                 <Header />
-                <GalleryPage content={item.gallery} identifier={index} />
+                <GalleryPage content={item} />
               </AppLayout>
             }
           />

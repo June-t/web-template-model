@@ -13,15 +13,19 @@
 		width: 100%;
 		height: 100%;
 		@include rfs(1rem, padding);
-
-		background-image: url('https://mediaslide-europe.storage.googleapis.com/lineup/pictures/285/1639/large-1642767685-5e7e87db137d781c81e4f13a805fded7.jpg');
 		background-size: cover;
 		background-position: center;
+
+		& .header__desktop {
+			& .header {
+				width: 100%;
+			}
+		}
+
 
 		& a {
 			color: var(--color-secondary);
 			text-transform: uppercase;
-			@include rfs(1.1875rem, font-size);
 		}
 	}
 
@@ -93,6 +97,7 @@
 			& h2 {
 				@include rfs(7.5rem, font-size);
 				align-self: flex-end;
+				width: 100%;
 
 				@include media(lg) {
 					@include rfs(5rem, font-size);
