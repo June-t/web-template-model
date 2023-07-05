@@ -13,17 +13,51 @@ $media: (
   mb: 575.98px
 );
 
-@mixin media($breakpoint) {
+// @mixin media($breakpoint) {
 
-  @each $breakpoints,
-  $size in $media {
-    @if $breakpoint==$breakpoints {
-      @media screen and (max-width: $size) {
-        @content;
-      }
+//   @each $breakpoints,
+//   $size in $media {
+//     @if $breakpoint==$breakpoints {
+//       @media screen and (min-width: $size) {
+//         @content;
+//       }
+//     }
+//   }
+// }
+
+
+@mixin media($size) {
+  @if $size ==sm {
+    @media (max-width: 599px) {
+      @content;
+    }
+  }
+
+  @else if $size ==md {
+    @media (min-width: 600px) {
+      @content;
+    }
+  }
+
+  @else if $size ==lg {
+    @media (min-width: 900px) {
+      @content;
+    }
+  }
+
+  @else if $size ==xl {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+
+  @else if $size ==xxl {
+    @media (min-width: 1800px) {
+      @content;
     }
   }
 }
+
 
 /*============== 02. Other ===============*/
 

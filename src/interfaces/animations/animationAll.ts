@@ -169,7 +169,7 @@ export const toExpandElementsAnimation = () => {
   timeline.to(
     ['.item__img', '.item__img img'],
     { width: '100%', duration: 0.5 },
-    '>'
+    '>+0.5'
   )
 
   // EXPAND IMAGE [03/04]
@@ -206,6 +206,8 @@ export const toExpandElementsAnimation = () => {
     '>+1'
   )
 
+  timeline.set('.gallery__item', { pointerEvents: 'auto' }, '>')
+
   timeline.fromTo(
     '.indicators',
     { opacity: 0, visibility: 'visible' },
@@ -220,14 +222,14 @@ export const toExpandElementsAnimation = () => {
     '<'
   )
 
-  timeline.fromTo('.home__button', { opacity: 0 }, { opacity: 1 }, '<')
-
   timeline.fromTo(
     '.home__indicators .indicators span',
     { y: '100%' },
     { y: '0%', stagger: 0.1, duration: 1 },
     '<'
   )
+
+  timeline.to('.home__button', { opacity: 1, duration: 0.5 }, '<')
 
   return timeline
 }
@@ -319,7 +321,7 @@ export const toContactAnimation = () => {
       })
 
       timeline.fromTo(
-        '.contact__background a',
+        ['.header a', '.header h3'],
         { opacity: 0, y: 10 },
         { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
         '<'

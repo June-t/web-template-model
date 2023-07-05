@@ -27,9 +27,8 @@
 				width: max-content;
 				transform: translateY(30%);
 
-				@each $media in md,
-				sm,
-				mb {
+				@each $media in mb,
+				sm {
 					@include media($media) {
 						transform: translateY(60%);
 					}
@@ -43,12 +42,17 @@
 				& span {
 					@include rfs(9.375rem, font-size);
 					@include rfs(7.5rem, line-height);
+					@include rfs(-1.0594rem, letter-spacing);
 
-					@each $media in xxl,
-					xl {
+					@include media(xxl) {
+						@include rfs(15rem, font-size);
+						@include rfs(11.25rem, line-height);
+					}
+
+					@each $media in mb,
+					sm {
 						@include media($media) {
-							@include rfs(15rem, font-size);
-							@include rfs(11.25rem, line-height);
+							@include rfs(-0.4375rem, letter-spacing);
 						}
 					}
 
@@ -87,7 +91,7 @@
 					display: flex;
 					flex-direction: column;
 					width: 100%;
-					// pointer-events: none;
+					pointer-events: none;
 					text-align: center;
 					align-items: center;
 					gap: 1em;
@@ -106,9 +110,8 @@
 							@include size(100%, 50vh);
 							object-fit: cover;
 
-							@each $media in md,
-							sm,
-							mb {
+							@each $media in mb,
+							sm {
 								@include media($media) {
 									height: 100%;
 								}
@@ -157,9 +160,8 @@
 
 				& .gallery__item {
 
-					@each $media in md,
-					sm,
-					mb {
+					@each $media in mb,
+					sm {
 						@include media($media) {
 							display: grid;
 							height: 100%;
@@ -171,9 +173,8 @@
 
 					& .item__img {
 
-						@each $media in md,
-						sm,
-						mb {
+						@each $media in mb,
+						sm {
 							@include media($media) {
 								width: 100% !important;
 								height: 100% !important;
@@ -186,9 +187,8 @@
 
 						& img {
 
-							@each $media in md,
-							sm,
-							mb {
+							@each $media in mb,
+							sm {
 								@include media($media) {
 									height: 100% !important;
 								}
@@ -198,9 +198,8 @@
 
 					& .item__text {
 
-						@each $media in md,
-						sm,
-						mb {
+						@each $media in mb,
+						sm {
 							@include media($media) {
 								@include size(100%, 100%);
 							}
@@ -218,9 +217,8 @@
 				justify-content: center;
 				align-items: center;
 
-				@each $media in md,
-				sm,
-				mb {
+				@each $media in mb,
+				sm {
 					@include media($media) {
 						transform: translateY(-10%);
 					}
@@ -302,9 +300,8 @@
 				display: flex;
 				justify-content: center;
 
-				@each $media in md,
-				sm,
-				mb {
+				@each $media in mb,
+				sm {
 					@include media($media) {
 						width: 40vh !important;
 						margin: 0 !important;
@@ -324,21 +321,48 @@
 
 		&__content.animation__rotate {
 
-
 			& .swiper-slide:nth-child(5) .gallery__item {
 				transform: rotate(10deg) translateY(-10px);
+
+				@each $media in mb,
+				sm {
+					@include media($media) {
+						transform: rotate(5deg) translateY(-5px);
+					}
+				}
 			}
 
 			& .swiper-slide:nth-child(4) .gallery__item {
 				transform: rotate(15deg) translateY(-15px);
+
+				@each $media in mb,
+				sm {
+					@include media($media) {
+						transform: rotate(7deg) translateY(-7px);
+					}
+				}
 			}
 
 			& .swiper-slide:nth-child(3) .gallery__item {
 				transform: rotate(20deg) translateY(-20px);
+
+				@each $media in mb,
+				sm {
+					@include media($media) {
+						transform: rotate(9deg) translateY(-9px);
+					}
+				}
 			}
 
 			& .swiper-slide:nth-child(2) .gallery__item {
 				transform: rotate(25deg) translateY(-25px);
+
+				@each $media in mb,
+				sm {
+					@include media($media) {
+						transform: rotate(11deg) translateY(-11px);
+					}
+				}
 			}
 		}
 
@@ -350,9 +374,8 @@
 			grid-gap: 1em;
 			padding: 1em 0;
 
-			@each $media in md,
-			sm,
-			mb {
+			@each $media in mb,
+			sm {
 				@include media($media) {
 					display: none !important;
 				}
@@ -379,9 +402,8 @@
 			& .indicators {
 				@include rfs(6.25rem, font-size);
 
-				@each $media in md,
-				sm,
-				mb {
+				@each $media in mb,
+				sm {
 					@include media($media) {
 						font-size: 3.125rem;
 					}
@@ -414,7 +436,7 @@
 				position: absolute;
 				width: 100%;
 
-				@each $media in md,
+				@each $media in mb,
 				sm,
 				mb {
 					@include media($media) {

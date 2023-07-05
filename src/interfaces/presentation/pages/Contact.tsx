@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import { toContactAnimation } from '../../animations/animationAll'
+import Header from '../components/Header'
 
 export const Contact = ({ isPhone, isEmail, isBackground, isSocial }) => {
   type SocialMedia = {
@@ -26,7 +26,7 @@ export const Contact = ({ isPhone, isEmail, isBackground, isSocial }) => {
     <>
       <main className="contact">
         <div className="contact__background" data-img={isBackground}>
-          <Link to="/">Home</Link>
+          <Header />
         </div>
         <div className="contact__information">
           <div className="information__links">

@@ -81,7 +81,8 @@ const Home = ({ isName, isGallery }) => {
           className="gallery__item"
           key={crypto.randomUUID()}
           onMouseOver={(event) => {
-            toShowElements(event)
+            if (width && width <= 768) return
+            width && width <= 768 ? null : toShowElements(event)
           }}
         >
           <div className="item__img">
@@ -177,7 +178,7 @@ const Home = ({ isName, isGallery }) => {
   toLoaderAnimaton()
 
   setTimeout(() => {
-    // toExpandElementsAnimation()
+    toExpandElementsAnimation()
   }, 5000)
 
   return <>{width && width <= 768 ? <Mobile /> : <Desktop />}</>

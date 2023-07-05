@@ -1,5 +1,6 @@
-import { Fragment, useCallback, useRef } from 'react'
+import { Fragment, useRef, useCallback } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper'
 import IconArrow from '../components/Arrow'
 
 import 'swiper/css'
@@ -24,7 +25,16 @@ export const Gallery = ({ content }: any) => {
 
     return (
       <Fragment>
-        <Swiper spaceBetween={20} slidesPerView={slides} ref={sliderRef}>
+        <Swiper
+          slidesPerView={slides}
+          spaceBetween={20}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+        >
           {gallery.map((item: unknown) => {
             return (
               <SwiperSlide key={crypto.randomUUID()}>
@@ -35,14 +45,6 @@ export const Gallery = ({ content }: any) => {
             )
           })}
         </Swiper>
-        <div className="home__button">
-          <div onClick={handlePrev} className="button__previus button">
-            <IconArrow />
-          </div>
-          <div onClick={handleNext} className="button__next button">
-            <IconArrow />
-          </div>
-        </div>
       </Fragment>
     )
   }
