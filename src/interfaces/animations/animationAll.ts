@@ -190,7 +190,7 @@ export const toExpandElementsAnimation = (): gsap.core.Timeline => {
     })
 
     return LAST
-  }, '>+1')
+  }, '>+1.5')
 
   // STYLE SET TRANSITION [OTHERS]
 

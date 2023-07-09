@@ -1,7 +1,6 @@
-import { Fragment, useRef, useCallback } from 'react'
+import { Fragment } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
-import IconArrow from '../components/Arrow'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -11,18 +10,6 @@ export const Gallery = ({ content }: any) => {
   const URL = '/photographs/nastyhaiko/'
 
   const SliderComponent = ({ slides }: any): JSX.Element => {
-    const sliderRef = useRef(null)
-
-    const handlePrev = useCallback(() => {
-      if (!sliderRef.current) return
-      sliderRef.current.swiper.slidePrev()
-    }, [])
-
-    const handleNext = useCallback(() => {
-      if (!sliderRef.current) return
-      sliderRef.current.swiper.slideNext()
-    }, [])
-
     return (
       <Fragment>
         <Swiper

@@ -179,7 +179,7 @@ const Home = ({ isName, isGallery }) => {
   }
 
   useLayoutEffect(() => {
-    if (!animationExecuted) {
+    if (!animationExecuted || loader) {
       setLoader(true)
       gsap.delayedCall(1, () => {
         toLoaderAnimation().play()
