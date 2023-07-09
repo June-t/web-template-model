@@ -98,6 +98,8 @@
 					cursor: pointer;
 					position: relative;
 
+					// transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
 					& .item__img {
 						width: 100%;
 						height: auto;
@@ -447,9 +449,14 @@
 		}
 	}
 
-
-
-	.swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden {
+	.swiper {
 		width: 100% !important;
 		height: 100%;
+	}
+
+	.home__content .content__title,
+	.home__indicators,
+	.home__button,
+	.content__image {
+		opacity: 0;
 	}

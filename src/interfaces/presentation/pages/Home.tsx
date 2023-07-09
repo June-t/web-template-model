@@ -1,11 +1,11 @@
-import { useRef, useState, Fragment, useCallback } from 'react'
+import { useRef, useState, Fragment, useCallback, useLayoutEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
 import {
+  toLoaderAnimation,
   toShowElements,
-  toLoaderAnimaton,
-  toExpandElementsAnimation,
 } from '../../animations/animationAll'
 import IconArrow from '../components/Arrow'
 
@@ -14,7 +14,8 @@ import 'swiper/css/navigation'
 
 const Home = ({ isName, isGallery }) => {
   const { width } = useWindowSize()
-  const [loader] = useState<boolean>(true)
+  const [loader, setLoader] = useState<boolean>(false)
+  const [animationExecuted, setAnimationExecuted] = useState<boolean>(false)
   const containerRef = useRef(null)
 
   const name: string = isName
@@ -86,7 +87,7 @@ const Home = ({ isName, isGallery }) => {
           }}
         >
           <div className="item__img">
-            {loader && <LoaderCounter />}
+            <LoaderCounter />
             <img src={`${URL}/${file}/${previewImage}`} alt={file} />
           </div>
           <div className="item__text">
@@ -121,7 +122,9 @@ const Home = ({ isName, isGallery }) => {
         <div className="home__indicators">
           <div className="indicators">
             <hr className="line" />
-            <span className="indicators__number">04</span>
+            <span className="indicators__number">
+              {`${'0'}` + `${totalGallery}`}
+            </span>
             <span className="indicators__text">Gallery</span>
           </div>
           <div className="footerExtend">
@@ -175,11 +178,15 @@ const Home = ({ isName, isGallery }) => {
     )
   }
 
-  toLoaderAnimaton()
-
-  setTimeout(() => {
-    toExpandElementsAnimation()
-  }, 5000)
+  useLayoutEffect(() => {
+    if (!animationExecuted) {
+      setLoader(true)
+      gsap.delayedCall(1, () => {
+        toLoaderAnimation().play()
+      })
+      setAnimationExecuted(true)
+    }
+  }, [animationExecuted])
 
   return <>{width && width <= 768 ? <Mobile /> : <Desktop />}</>
 }

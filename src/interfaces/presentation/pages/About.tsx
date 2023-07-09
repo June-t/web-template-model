@@ -56,7 +56,9 @@ export const About = ({ isInterview, isFaq }) => {
             <QuestionAnswer property={isInterview} />
           </div>
           <div className="content__faq">
-            <h2>faq</h2>
+            <h2>
+              faq <span>(Warning: Filler Content)</span>
+            </h2>
             <QuestionAnswer property={isFaq} />
           </div>
         </div>

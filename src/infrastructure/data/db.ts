@@ -2,10 +2,11 @@ export const database = {
   about: {
     interview: {
       name: 'Nastya Haiko',
-      agency: 'lineupmodels',
-      age: 28,
-      height: "178CM/5' 10'",
-      placeOfBirth: 'Russian',
+      height: "178CM/5' 10''",
+      bust: "83CM/32½''",
+      waist: "61CM/24''",
+      hips: "88CM/34½''",
+      shoes: '41CM/10',
     },
     faq: [
       {
@@ -25,13 +26,13 @@ export const database = {
     ],
   },
   contact: {
-    phone: '+1 123-456-7890',
-    email: 'johndoe@example.com',
+    phone: '+34 930 180 630',
+    email: 'laia@lineupmodels.com',
     background: '/photographs/nastyhaiko/contact/background.jpg',
     socialMedia: {
-      facebook: 'https://www.facebook.com/johndoe',
-      twitter: 'https://www.twitter.com/johndoe',
-      instagram: 'https://www.instagram.com/johndoe',
+      instagram: 'https://www.instagram.com/starun1corn/',
+      agency: 'https://www.lineupmodels.com/models/new-faces/285-nastya-haiko/',
+      gallery: 'https://www.selective-mgmt.pl/women/mainboard/nastya-haiko-314',
     },
   },
   home: {

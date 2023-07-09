@@ -24,119 +24,122 @@ const invertedTextUtility = (target: any) => {
 
 // ANIMATIONS IN HOME
 
-export const enterText = () => {
-  const timeline = gsap.timeline({
-    ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
+export const toLoaderAnimation = (): gsap.core.Timeline => {
+  const timeline = gsap.timeline({ paused: true })
+
+  // VISIBILITY SET
+
+  timeline.set(['.is-home'], { opacity: 1, duration: 0.5 })
+
+  timeline.set(['.home__content .content__title', '.content__image'], {
+    opacity: 1,
   })
+
+  timeline.set(
+    [
+      '.header',
+      '.home__button',
+      '.footerExtend',
+      '.indicators',
+      '.button_slider',
+      '.item__img img',
+    ],
+    { opacity: 0 }
+  )
+
+  timeline.set(['.swiper', '.swiper-container', '.is-home'], {
+    overflow: 'hidden',
+  })
+
+  // COUNTER LOADER [01/04]
+  timeline
+    .to(
+      '.loader__counter span',
+      {
+        duration: 1,
+        innerHTML: 100,
+        ease: 'cubic-bezier(0.17,0.84,0.44,1);',
+        roundProps: 'innerHTML',
+        onUpdate() {
+          const counter = document.querySelector('.loader__counter span')
+          if (counter) {
+            counter.textContent = Math.round(
+              this.targets()[0].innerHTML
+            ).toString()
+          }
+        },
+      },
+      '<'
+    )
+    .to('.loader__counter span', { opacity: 1, duration: 0.5 }, '<')
+    .to('.item__img', { height: '50vh', duration: 1 }, '<')
+    .to('.loader__counter', { opacity: 0, duration: 0.2 }, '+=0.5')
+  // FIRST IMAGE [02/04]
+  timeline
+    .to('.item__img', { background: '#0000' }, '<-0.3')
+    .to('.item__img img', { opacity: 1 }, '>-1')
+    .to('.item__img', { width: '100%', duration: 0.5 }, '>')
+
+  // VISIBILITY SET
+
+  timeline.to(
+    ['.header', '.footerExtend', '.home__indicators'],
+    {
+      opacity: 1,
+      stagger: 0.1,
+      duration: 0.5,
+    },
+    '<'
+  )
+
+  // ALL IMAGE ROTATE [03/04]
+
+  timeline.add(() => {
+    const toContainer = document.querySelector('.home__content')
+    const STATE = Flip.getState('.gallery__item')
+    toContainer?.classList.add('animation__rotate')
+    const LAST = Flip.from(STATE, {
+      ease: 'power3.inOut',
+      duration: 1,
+      stagger: 0.05,
+    })
+
+    return LAST
+  }, '>+1')
+
+  // ENTER TO TEXT & SET [04/04]
 
   timeline.fromTo(
     '.mask span',
-    { top: '20vh' },
-    { top: '0vh', stagger: 0.08, duration: 1 }
+    { top: '10vh', opacity: 0 },
+    { top: '0vh', opacity: 1, stagger: 0.08, duration: 1 }
   )
+  timeline.set(
+    ['.swiper', '.swiper-container', '.is-home'],
+    { overflow: 'visible' },
+    '<'
+  )
+
+  timeline.set('.swiper', { pointerEvents: 'none', userSelect: 'none' }, '<')
+  timeline.set('.home', { overflow: 'visible', cursor: 'pointer' }, '>')
+  timeline.add(() => {
+    const toContainer = document.querySelector('.home')
+
+    function handleClick() {
+      toExpandElementsAnimation().play()
+      toContainer.removeEventListener('click', handleClick)
+    }
+
+    toContainer.addEventListener('click', handleClick)
+  })
 
   return timeline
 }
 
-export const toLoaderAnimaton = () => {
-  useEffect(() => {
-    gsap.delayedCall(0.2, () => {
-      const timeline = gsap.timeline({ paused: true })
-      const toContainer = document.querySelector('.home__content')
-
-      // VISIBILITY SET
-
-      timeline.set(['.is-home'], { opacity: 1 })
-
-      timeline.set(
-        [
-          '.header',
-          '.home__button',
-          '.footerExtend',
-          '.indicators',
-          '.button_slider',
-          '.item__img img',
-        ],
-        { opacity: 0 }
-      )
-
-      timeline.set(['.swiper', '.swiper-container', '.is-home'], {
-        overflow: 'hidden',
-      })
-
-      // COUNTER LOADER [01/04]
-      timeline
-        .to(
-          '.loader__counter span',
-          {
-            duration: 1,
-            innerHTML: 100,
-            ease: 'cubic-bezier(0.17,0.84,0.44,1);',
-            roundProps: 'innerHTML',
-            onUpdate() {
-              const counter = document.querySelector('.loader__counter span')
-              if (counter) {
-                counter.textContent = Math.round(
-                  this.targets()[0].innerHTML
-                ).toString()
-              }
-            },
-          },
-          '<'
-        )
-        .to('.loader__counter span', { opacity: 1, duration: 0.5 }, '<')
-        .to('.item__img', { height: '50vh', duration: 1 }, '<')
-        .to('.loader__counter', { opacity: 0, duration: 0.2 }, '+=0.5')
-      // FIRST IMAGE [02/04]
-      timeline
-        .to('.item__img', { background: '#0000' }, '<-0.3')
-        .to('.item__img img', { opacity: 1 }, '>-1')
-        .to('.item__img', { width: '100%', duration: 0.5 }, '>')
-
-      // VISIBILITY SET
-
-      timeline.to(
-        ['.header', '.footerExtend'],
-        {
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.5,
-        },
-        '<'
-      )
-
-      // ALL IMAGE ROTATE [03/04]
-
-      timeline.add(() => {
-        const STATE = Flip.getState('.gallery__item')
-        toContainer?.classList.add('animation__rotate')
-        const LAST = Flip.from(STATE, {
-          ease: 'power3.inOut',
-          duration: 1,
-          stagger: 0.05,
-        })
-
-        return LAST
-      }, '>+1')
-
-      // ENTER TO TEXT & SET [04/04]
-
-      timeline.add(enterText(), '>')
-      timeline.set(
-        ['.swiper', '.swiper-container', '.is-home'],
-        { overflow: 'visible' },
-        '<'
-      )
-      timeline.set('.home', { overflow: 'visible' }, '>')
-      timeline.play()
-    })
-  }, [])
-}
-
-export const toExpandElementsAnimation = () => {
-  const toContainer = document.querySelector('.home__content')
+export const toExpandElementsAnimation = (): gsap.core.Timeline => {
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
+    paused: true,
     onComplete: () => {
       timeline.kill()
     },
@@ -150,13 +153,14 @@ export const toExpandElementsAnimation = () => {
       stagger: 0.1,
     })
     .set(['.content__title span', '.footerExtend'], { display: 'none' })
-    .set('.content__title span', {
-      visibility: 'hidden',
-    })
+  timeline.set('.home', { cursor: 'auto' }, '>').set('.content__title span', {
+    visibility: 'hidden',
+  })
 
   // EXPAND INTERIOR ROTATE [02/04]
 
   timeline.add(() => {
+    const toContainer = document.querySelector('.home__content')
     const STATE = Flip.getState('.gallery__item')
     toContainer?.classList.remove('animation__rotate')
     Flip.from(STATE, {
@@ -175,6 +179,7 @@ export const toExpandElementsAnimation = () => {
   // EXPAND IMAGE [03/04]
 
   timeline.add(() => {
+    const toContainer = document.querySelector('.home__content')
     const STATE = Flip.getState('.gallery__item')
     toContainer?.classList.add('mobile__animation')
     toContainer?.classList.remove('loader__animation')
@@ -185,7 +190,7 @@ export const toExpandElementsAnimation = () => {
     })
 
     return LAST
-  }, '>+1.5')
+  }, '>+1')
 
   // STYLE SET TRANSITION [OTHERS]
 
@@ -207,6 +212,7 @@ export const toExpandElementsAnimation = () => {
   )
 
   timeline.set('.gallery__item', { pointerEvents: 'auto' }, '>')
+  timeline.set('.swiper', { pointerEvents: 'auto', userSelect: 'auto' }, '<')
 
   timeline.fromTo(
     '.indicators',
