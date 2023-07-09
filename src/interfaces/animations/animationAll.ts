@@ -25,7 +25,12 @@ const invertedTextUtility = (target: any) => {
 // ANIMATIONS IN HOME
 
 export const toLoaderAnimation = (): gsap.core.Timeline => {
-  const timeline = gsap.timeline({ paused: true })
+  const timeline = gsap.timeline({
+    paused: true,
+    onComplete: () => {
+      timeline.kill()
+    },
+  })
 
   // VISIBILITY SET
 
@@ -83,7 +88,7 @@ export const toLoaderAnimation = (): gsap.core.Timeline => {
   // VISIBILITY SET
 
   timeline.to(
-    ['.header', '.footerExtend', '.home__indicators'],
+    ['.is-home .header', '.footerExtend', '.home__indicators'],
     {
       opacity: 1,
       stagger: 0.1,
@@ -140,9 +145,6 @@ export const toExpandElementsAnimation = (): gsap.core.Timeline => {
   const timeline = gsap.timeline({
     ease: 'cubic-bezier(0.45,0.05,0.55,0.95);',
     paused: true,
-    onComplete: () => {
-      timeline.kill()
-    },
   })
 
   // VISIBILITY SET [01/04]

@@ -1,6 +1,5 @@
 import { useRef, useState, Fragment, useCallback, useLayoutEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useWindowSize } from 'usehooks-ts'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import {
@@ -13,7 +12,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 const Home = ({ isName, isGallery }) => {
-  const { width } = useWindowSize()
   const [loader, setLoader] = useState<boolean>(false)
   const [animationExecuted, setAnimationExecuted] = useState<boolean>(false)
   const containerRef = useRef(null)
@@ -82,8 +80,7 @@ const Home = ({ isName, isGallery }) => {
           className="gallery__item"
           key={crypto.randomUUID()}
           onMouseOver={(event) => {
-            if (width && width <= 768) return
-            width && width <= 768 ? null : toShowElements(event)
+            window.screen.width <= 768 ? null : toShowElements(event)
           }}
         >
           <div className="item__img">
@@ -188,7 +185,7 @@ const Home = ({ isName, isGallery }) => {
     }
   }, [animationExecuted])
 
-  return <>{width && width <= 768 ? <Mobile /> : <Desktop />}</>
+  return <>{window.screen.width <= 768 ? <Mobile /> : <Desktop />}</>
 }
 
 export default Home
