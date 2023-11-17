@@ -37,11 +37,14 @@
  				text-align: center;
 
  				& img {
- 					width: 70vh;
+ 					width: auto;
+ 					height: 70vh;
 
  					@each $media in sm, mb {
- 						width: 100%;
- 						height: 100%;
+ 						@include media($media) {
+ 							width: 100%;
+ 							height: 100%;
+ 						}
  					}
  				}
  			}
@@ -60,12 +63,6 @@
  				align-items: end;
  				height: max-content;
  			}
- 		}
-
- 		& img {
- 			width: 100%;
- 			height: 70vh;
- 			object-fit: cover;
  		}
  	}
 
