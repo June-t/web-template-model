@@ -12,15 +12,25 @@
 	&__background {
 		width: 100%;
 		height: 100%;
-		@include rfs(1rem, padding);
-		background-size: cover;
-		background-position: 50% 25%;
+		position: relative;
 
-		& .header__desktop {
-			& .header {
-				width: 100%;
+
+		& img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		& .header {
+			padding: 1rem;
+
+			&__desktop {
+				z-index: 1;
 			}
 		}
+
+
 
 
 		& a {

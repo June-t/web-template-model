@@ -25,7 +25,8 @@ export const Contact = ({ isPhone, isEmail, isBackground, isSocial }) => {
   return (
     <>
       <main className="contact">
-        <div className="contact__background" data-img={isBackground}>
+        <div className="contact__background">
+          <img src={isBackground} alt="Nastya Haiko" />
           <Header />
         </div>
         <div className="contact__information">
